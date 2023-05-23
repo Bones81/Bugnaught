@@ -4,7 +4,7 @@ Bug Tracker
 
 ## Overview
 
-This portfolio project is a bug tracker for a software development team. 
+This portfolio project is a bug tracker for a software development team.
 
 ## Development Plan, a/o 5/23/23
 
@@ -31,7 +31,7 @@ This portfolio project is a bug tracker for a software development team.
 ## Intended Use Cases
 
 - Enable project managers to create projects so that users can log bugs for those projects
-- Enable all users to create bug reports. 
+- Enable all users to create bug reports.
 - Enable all users to add comments to individual bugs, to foster discussion and collaboration
 - Enable project managers to assign developers to bugs
 - Enable admins to assign user roles
