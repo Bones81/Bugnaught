@@ -21,9 +21,9 @@ const App: React.FC = () => {
   
   useEffect(() => {
     setBugs([
-      // {name: 'bug1', priority: 'high', description: 'No real data yet!'},
-      // {name: 'bug2', priority: 'medium', description: 'Cannot add comments to bug yet!'},
-      // {name: 'bug3', priority: 'low', description: 'Bootstrap not integrated!'}
+      {name: 'bug1', priority: 'high', description: 'No real data yet!'},
+      {name: 'bug2', priority: 'medium', description: 'Cannot add comments to bug yet!'},
+      {name: 'bug3', priority: 'low', description: 'Bootstrap not integrated!'}
     ])
 
     setProjects([
@@ -37,6 +37,8 @@ const App: React.FC = () => {
     <>
       <Header />
       <Navigation name="Nathan" />
+
+      {/* Bugs Mapping */}
       { bugs.length ? bugs.map(bug => {
         return (
           <div className="wrapper">
@@ -49,7 +51,24 @@ const App: React.FC = () => {
         )}) 
         : 
         <h3>No Bugs Found!</h3>
-    }
+      }
+
+      {/* Projects Mapping */}
+      { projects.length ? projects.map(project => {
+        return (
+          <div className="wrapper">
+            <div className="card">
+                <h3>{project.name}</h3>
+                <h5>{project.id}</h5>
+            </div>
+          </div>
+        )}) 
+        : 
+        <h3>No Projects Found!</h3>
+      }
+
+      {/* End Content */}
+      
     </>
   )
 }
