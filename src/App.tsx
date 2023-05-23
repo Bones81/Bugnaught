@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import Header from './assets/components/header'
+import Header from './Header/header'
 
-function App() {
-
+const App = () => {
 
   return (
     <>

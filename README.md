@@ -16,11 +16,11 @@ This portfolio project is a bug tracker for a software development team.
 
 ### Advanced Goals
 
-7. Incorporate React Router
-8. Integrate live chat capability for live bug squashing sessions.
-9. Integrate ChatGPT into live chat capability
-10. Add email or push notifications upon bug updates and assignments
-11. Add Redux, if necessary
+1. Incorporate React Router
+1. Integrate live chat capability for live bug squashing sessions.
+1. Integrate ChatGPT into live chat capability
+1. Add email or push notifications upon bug updates and assignments
+1. Add Redux, if necessary
 
 ## Technologies Used
 
