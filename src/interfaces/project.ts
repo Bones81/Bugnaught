@@ -1,6 +1,9 @@
+import BugState from "./bug"
+
 interface ProjectState {
     id: number,
-    name: string
+    name: string,
+    bugs: BugState[]
   }
 
 export default ProjectState
