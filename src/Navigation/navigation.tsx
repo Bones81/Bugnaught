@@ -17,8 +17,8 @@ const Navigation = (props: any) => {
             }
                 <ul className="p-0 list-unstyled my-5">
                     <li><a href="#" className="link">Projects</a></li>
-                    <li><a href="#">Manage Roles</a></li>
-                    <li>Assign</li>
+                    <li><a href="#" className="link">Manage Roles</a></li>
+                    <li><a href="#" className="link">Assign</a></li>
                 </ul>
             </nav>
         </>

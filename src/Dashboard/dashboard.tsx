@@ -21,14 +21,14 @@ const Dashboard = () => {
   
       setProjects([
         {id: 1, name: 'Bug Tracker App', bugs: [...bugs.slice(0,3)]},
-        {id: 2, name: 'Portfolio Site', bugs: [...bugs].slice(3,6)},
-        {id: 3, name: 'Actor Website', bugs: [...bugs].slice(6,9)},
+        {id: 2, name: 'Portfolio Site', bugs: [...bugs.slice(3,6)]},
+        {id: 3, name: 'Actor Website', bugs: [...bugs.slice(6,9)]},
       ])
     }, [])
 
     return (
         <>
-            <h1 className="display-5 text-center">Dashboard Goes Here</h1>
+            <h1 className="display-5 text-center">Dashboard</h1>
             <div className="container">
                 <div className="row justify-content-evenly">
                 { projects.length ? projects.map( project => {

@@ -3,6 +3,7 @@ import Header from './Header/header'
 import Navigation from './Navigation/navigation'
 import { Button } from 'react-bootstrap'
 import Dashboard from './Dashboard/dashboard'
+import Footer from './Footer/footer'
 
 const App: React.FC = () => {
 
@@ -34,6 +35,8 @@ const App: React.FC = () => {
       <Button variant="dark">Dark</Button> <Button variant="link">Link</Button>
 
       {/* End Bootstrap Testing */}
+
+      <Footer />
     </>
   )
 }
