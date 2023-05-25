@@ -8,15 +8,15 @@ const Dashboard = () => {
     
     useEffect(() => {
       setBugs([
-        {name: 'Needs real data', priority: 'high', description: 'No real data yet!'},
-        {name: 'Can\'t add comments', priority: 'medium', description: 'Cannot add comments to bug yet!'},
-        {name: 'Needs Bootstrap', priority: 'low', description: 'Bootstrap not integrated!'},
-        {name: 'Colors are bad', priority: 'high', description: 'Needs better colors'},
-        {name: 'Blur not working on mobile', priority: 'medium', description: 'Blur not working on mobile, even though it looks fine in devTools'},
-        {name: 'Database speed', priority: 'low', description: 'Data takes too long to load from spun down servers!'},
-        {name: 'Layout too simple', priority: 'high', description: 'Needs pizazz; maybe parallax?'},
-        {name: 'Old images', priority: 'medium', description: 'Needs some fresh imagery'},
-        {name: 'Colors', priority: 'low', description: 'Too much pastel; Find new, more dramatic color scheme.'}
+        {name: 'Needs real data', pid: 1, priority: 'high', description: 'No real data yet!'},
+        {name: 'Can\'t add comments', pid: 1, priority: 'medium', description: 'Cannot add comments to bug yet!'},
+        {name: 'Needs Bootstrap', pid: 1, priority: 'low', description: 'Bootstrap not integrated!'},
+        {name: 'Colors are bad', pid: 2, priority: 'high', description: 'Needs better colors'},
+        {name: 'Blur not working on mobile', pid: 2, priority: 'medium', description: 'Blur not working on mobile, even though it looks fine in devTools'},
+        {name: 'Database speed', pid: 2, priority: 'low', description: 'Data takes too long to load from spun down servers!'},
+        {name: 'Layout too simple', pid: 3, priority: 'high', description: 'Needs pizazz; maybe parallax?'},
+        {name: 'Old images', pid: 3, priority: 'medium', description: 'Needs some fresh imagery'},
+        {name: 'Colors', pid: 3, priority: 'low', description: 'Too much pastel; Find new, more dramatic color scheme.'}
       ])
   
       setProjects([
