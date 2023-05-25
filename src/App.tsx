@@ -7,7 +7,6 @@ import Footer from './Footer/footer'
 
 const App: React.FC = () => {
 
-
   return (
     <>
       <Header />

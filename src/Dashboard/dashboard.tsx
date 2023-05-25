@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import BugState from "../interfaces/bug"
 import ProjectState from "../interfaces/project"
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
     const [bugs, setBugs] = useState<BugState[]>([])
     const [projects, setProjects] = useState<ProjectState[]>([])
     
@@ -19,12 +19,16 @@ const Dashboard = () => {
         {name: 'Colors', pid: 3, priority: 'low', description: 'Too much pastel; Find new, more dramatic color scheme.'}
       ])
   
-      setProjects([
-        {id: 1, name: 'Bug Tracker App', bugs: [...bugs.slice(0,3)]},
-        {id: 2, name: 'Portfolio Site', bugs: [...bugs.slice(3,6)]},
-        {id: 3, name: 'Actor Website', bugs: [...bugs.slice(6,9)]},
-      ])
+
     }, [])
+
+    useEffect(() => {
+        setProjects([
+            {id: 1, name: 'Bug Tracker App', bugs: [...bugs.slice(0,3)]},
+            {id: 2, name: 'Portfolio Site', bugs: [...bugs.slice(3,6)]},
+            {id: 3, name: 'Actor Website', bugs: [...bugs.slice(6,9)]},
+          ])
+    }, [bugs])
 
     return (
         <>
