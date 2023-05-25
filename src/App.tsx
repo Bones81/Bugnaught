@@ -1,9 +1,6 @@
-import { useState, useEffect } from 'react'
 import './App.css'
 import Header from './Header/header'
 import Navigation from './Navigation/navigation'
-import BugState from './interfaces/bug'
-import ProjectState from './interfaces/project'
 import { Button } from 'react-bootstrap'
 import Dashboard from './Dashboard/dashboard'
 
@@ -13,9 +10,15 @@ const App: React.FC = () => {
   return (
     <>
       <Header />
-      <div className="container">
-        <Navigation name="Nathan" />
-        <Dashboard />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-3 col-lg-2">
+            <Navigation name="Nathan" />
+          </div>
+          <div className="col-sm-9 col-lg-10">
+            <Dashboard />
+          </div>
+        </div>
       </div>
 
 

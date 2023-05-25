@@ -28,12 +28,12 @@ const Dashboard = () => {
 
     return (
         <>
-            <h1>Dashboard Goes Here</h1>
-            <div className="container-lg">
-                <div className="row">
+            <h1 className="display-5 text-center">Dashboard Goes Here</h1>
+            <div className="container">
+                <div className="row justify-content-evenly">
                 { projects.length ? projects.map( project => {
                     return (
-                            <div className="card shadow-lg m-3 p-3 bg-primary col-sm-4 col-lg-3">
+                            <div className="card shadow-lg m-3 p-3 bg-primary col-10 col-lg-3">
                                 <h3 className="text-light">{ project.name }</h3>
                                 <h5 className="text-dark">Bug List</h5>
                                 <ul>

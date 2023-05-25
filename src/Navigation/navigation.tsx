@@ -10,14 +10,14 @@ const Navigation = (props: any) => {
 
     return (
         <>
-            <nav>
+            <nav className="p-3">
             {!user ? 
-                <h3>Hello, Guest!</h3> :
-                <h3>Hello, {user}!</h3>
+                <h3 className="lead my-5">Hello, Guest!</h3> :
+                <h3 className="lead my-5">Hello, {user}!</h3>
             }
-                <ul>
-                    <li>Projects</li>
-                    <li>Manage Roles</li>
+                <ul className="p-0 list-unstyled my-5">
+                    <li><a href="#" className="link">Projects</a></li>
+                    <li><a href="#">Manage Roles</a></li>
                     <li>Assign</li>
                 </ul>
             </nav>

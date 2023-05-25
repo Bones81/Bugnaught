@@ -3,4 +3,8 @@
   margin: 0 auto;
 }
 
-
+body {
+  background: linear-gradient(-15deg, lightgrey, silver, lightgrey);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
