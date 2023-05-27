@@ -2,7 +2,11 @@ import { useState, useEffect } from "react"
 import BugState from "../interfaces/bug"
 import ProjectState from "../interfaces/project"
 
-const Dashboard = (props: any) => {
+interface DashboardProps {
+    view: String
+}
+
+const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
 
     const [bugs, setBugs] = useState<BugState[]>([])
     const [projects, setProjects] = useState<ProjectState[]>([])

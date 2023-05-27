@@ -1,4 +1,4 @@
-const Footer = () => {
+const Footer: React.FunctionComponent = () => {
     return (
         <>
             <footer className="container-fluid mt-auto bg-secondary">

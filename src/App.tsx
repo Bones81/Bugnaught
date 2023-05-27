@@ -5,12 +5,12 @@ import InfoPanel from './InfoPanel/infopanel'
 import Dashboard from './Dashboard/dashboard'
 import Footer from './Footer/footer'
 
-const App = () => {
+const App: React.FunctionComponent = () => {
   const [view, setView] = useState("projects-view");
 
   return (
     <>
-      <Header name="Nathan" setView={setView}/>
+      <Header setView={setView}/>
       <div className="container-fluid dash-container">
         <div className="row justify-content-center align-items-center my-3 gx-5">
           <div className="col-sm-2">

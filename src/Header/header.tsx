@@ -2,7 +2,11 @@ import './header.css'
 import { useState } from 'react';
 import { Navbar, Nav, Container, Button, Modal, ModalHeader, ModalFooter, ModalTitle, ModalBody, ModalDialog, Form, FormGroup, FormLabel, FormControl, FormText } from 'react-bootstrap'
 
-const Header = (props: any) => {
+interface HeaderProps {
+    setView: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Header: React.FunctionComponent<HeaderProps> = (props: any) => {
     const [showModal, setShowModal] = useState(false);
     const [formData, setFormData] = useState({ username: '', password: '' })
 

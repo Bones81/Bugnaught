@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import './infopanel.css'
 import { Container, Row, Col } from 'react-bootstrap'
 
-const InfoPanel = (props: any) => {
+const InfoPanel: React.FunctionComponent = () => {
     const [user, setUser] = useState('')
+    const users = [
+        'Nathan', 'Sujan', 'Jeff', 'Olivia'
+    ]
 
-
-    
     useEffect(() => {
-        setUser(props.name)
+        setUser(users[Math.floor(Math.random()* users.length)]) // return random user for fun
     }, [])
 
     return (
