@@ -2,9 +2,7 @@ import { useState, useEffect } from "react"
 import BugState from "../interfaces/bug"
 import ProjectState from "../interfaces/project"
 
-interface DashboardProps {
-    view: String
-}
+import DashboardProps from '../interfaces/dashboardprops'
 
 const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
 
