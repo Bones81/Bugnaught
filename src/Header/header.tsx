@@ -44,7 +44,7 @@ const Header: React.FunctionComponent<HeaderProps> = (props: any) => {
     return (
         <>
             <Navbar variant="dark" bg="dark" expand="lg">
-                <Container fluid>
+                <Container fluid="lg">
                     <Navbar.Brand href="#" className="text-light fs-1 py-3">
                             Bugnaught <span className="left-glove">🥊</span>🪲🥊
                     </Navbar.Brand>
@@ -68,19 +68,20 @@ const Header: React.FunctionComponent<HeaderProps> = (props: any) => {
                         <Form>
                             <FormGroup className="mt-3">
                                 <FormLabel>Username: </FormLabel>
-                                <FormControl type="text" name="username" placeholder='BugHunter27' onChange={(e) => handleChange(e)}></FormControl>
+                                <FormControl type="text" name="username" placeholder='Bugnaught23' onChange={(e) => handleChange(e)}></FormControl>
                             </FormGroup>
                             <FormGroup className="mt-3">
                                 <FormLabel>Password: </FormLabel>
-                                <FormControl type="password" name="password" placeholder='********' onChange={(e) => handleChange(e)}></FormControl>
+                                <FormControl type="password" name="password" placeholder='Enter password here' onChange={(e) => handleChange(e)}></FormControl>
                             </FormGroup>
                             <FormText className="text-muted d-block">We will encrypt and never share your password.</FormText>
-                            <Button className="my-3" variant="primary" onClick={handleLogin}>Login</Button>
+                            <div className="d-flex justify-content-center align-items-center">
+                                <Button className="mt-3" variant="primary" onClick={handleLogin}>Login</Button>
+                            </div>
                         </Form>
                     </ModalBody>
-                    <ModalFooter>
-                    <Button variant="secondary" onClick={handleClose}>Close</Button>
-
+                    <ModalFooter className="justify-content-center">
+                        <Button variant="secondary" onClick={handleClose}>Close</Button>
                     </ModalFooter>
                 </ModalDialog>
             </Modal>

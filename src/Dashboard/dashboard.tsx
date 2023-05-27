@@ -44,7 +44,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                 <div className="row justify-content-evenly">
                                 { projects.length ? projects.map( project => {
                                     return (
-                                            <div key={project.id} className="card shadow-lg m-3 p-3 bg-primary col-10 col-lg-3">
+                                            <div key={project.id} className="card rounded-0 shadow m-3 p-3 bg-primary col-10 col-lg-3">
                                                 <h3 className="text-light">{ project.name }</h3>
                                                 <h5 className="text-dark">Bug List</h5>
                                                 <ul className="list-unstyled">
@@ -66,11 +66,11 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         )
                     case "manage-roles-view":
                         return (
-                            <h1>Manage Roles View active</h1>
+                            <h1 className="text-center">Manage Roles View active</h1>
                         )
                     case "assign-devs-view":
                         return (
-                            <h1>Assign Devs View active</h1>
+                            <h1 className="text-center">Assign Devs View active</h1>
                         )
                     default:
                         return <h1>Default switch case active: no valid view in state</h1>   
