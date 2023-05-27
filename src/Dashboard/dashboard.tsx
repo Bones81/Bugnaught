@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import BugState from "../interfaces/bug"
 import ProjectState from "../interfaces/project"
 
-const Dashboard = (props) => {
+const Dashboard = (props: any) => {
 
     const [bugs, setBugs] = useState<BugState[]>([])
     const [projects, setProjects] = useState<ProjectState[]>([])
@@ -33,7 +33,7 @@ const Dashboard = (props) => {
 
     return (
         <>
-            <h1 className="display-5 text-center">Dashboard</h1>
+            <h1 className="display-1 text-center">Dashboard</h1>
             {(()=> { 
                 switch(props.view) {
                     case "projects-view":
@@ -74,38 +74,6 @@ const Dashboard = (props) => {
                         return <h1>Default switch case active: no valid view in state</h1>   
                 }})()
             }
-
-            
-        {/* Bugs Mapping */}
-        {/* { bugs.length ? bugs.map(bug => {
-            return (
-            <div className="wrapper">
-                <div className="card">
-                    <h3>{bug.name}</h3>
-                    <h5>{bug.priority}</h5>
-                    <p>{bug.description}</p>
-                </div>
-            </div>
-            )}) 
-            : 
-            <h3>No Bugs Found!</h3>
-        } */}
-
-        {/* Projects Mapping */}
-        {/* { projects.length ? projects.map(project => {
-            return (
-            <div className="wrapper">
-                <div className="card">
-                    <h3>{project.name}</h3>
-                    <h5>{project.id}</h5>
-                </div>
-            </div>
-            )}) 
-            : 
-            <h3>No Projects Found!</h3>
-        } */}
-
-        {/* End Content */}
         
         </>
     )

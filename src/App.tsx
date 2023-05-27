@@ -11,8 +11,8 @@ const App = () => {
   return (
     <>
       <Header name="Nathan" setView={setView}/>
-      <div className="container-fluid">
-        <div className="row justify-content-center align-items-center my-3">
+      <div className="container-fluid dash-container">
+        <div className="row justify-content-center align-items-center my-3 gx-5">
           <div className="col-sm-2">
             <InfoPanel />
           </div>

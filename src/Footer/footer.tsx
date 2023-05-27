@@ -1,8 +1,8 @@
-const Footer: React.FC = () => {
+const Footer = () => {
     return (
         <>
-            <footer className="container-fluid">
-                <div className="row">
+            <footer className="container-fluid mt-auto bg-secondary">
+                <div className="row align-items-center">
                     <div className="col-3 p-3">
                         <h3>Bugnaught by Nathan Freeman</h3>
                     </div>
