@@ -36,7 +36,7 @@ const ProjectView = (props: any) => {
             </Card.Body>
             <Card.Footer>
                 <div className="d-flex justify-content-evenly text-center">
-                    <Button variant="outline" className="disabled line-through">Add New Bug</Button>
+                    <Button variant="outline" className="disabled"><span className="line-through">Add New Bug</span></Button>
                     <Button onClick={props.handleResetProjectsView} variant="primary">Back to All Projects</Button>
                     </div>
             </Card.Footer>

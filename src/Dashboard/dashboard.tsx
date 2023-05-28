@@ -27,7 +27,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
       setBugs([
         {id: 1, name: 'Needs real data', pid: 1, priority: 'high', description: 'No real data yet!'},
         {id: 2, name: 'Can\'t add comments', pid: 1, priority: 'medium', description: 'Cannot add comments to bug yet!'},
-        {id: 3, name: 'Needs Bootstrap', pid: 1, priority: 'low', description: 'Bootstrap not integrated!'},
+        {id: 3, name: 'Needs Bootstrap', pid: 1, priority: 'closed', description: 'Bootstrap not integrated!'},
         {id: 4, name: 'Colors are bad', pid: 2, priority: 'high', description: 'Needs better colors'},
         {id: 5, name: 'Blur not working on mobile', pid: 2, priority: 'medium', description: 'Blur not working on mobile, even though it looks fine in devTools'},
         {id: 6, name: 'Database speed', pid: 2, priority: 'low', description: 'Data takes too long to load from spun down servers!'},
@@ -69,7 +69,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                                     { project.bugs.length ? project.bugs.map(bug => {
                                                         return ( 
                                                         <li key={bug.id} className="text-light">
-                                                            { bug.priority === 'high' ? '🔴' : bug.priority === 'medium' ? '🟡' : '🟢' } {bug.name } 
+                                                            { bug.priority === 'high' ? '🔴' : bug.priority === 'medium' ? '🟡' : bug.priority === 'low' ? '🟢' : '✅' } {bug.name } 
                                                         </li>
                                                         )
                                                     }) : null }
@@ -92,8 +92,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         )
                     case "single-project-view":
                         // Have to figure out how to pass a single project to this view
-                        const project = projects.filter( p => p.id === projectID )[0]
-                        console.log(project);
+                        const project = projects.find( p => p.id === projectID )
                         
                         return (
                             <>
