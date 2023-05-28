@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import './infopanel.css'
-import { Container, Row, Col } from 'react-bootstrap'
 
 const InfoPanel: React.FunctionComponent = () => {
     const [user, setUser] = useState('')
@@ -14,17 +13,15 @@ const InfoPanel: React.FunctionComponent = () => {
 
     return (
         <>
-            <Container fluid className='text-center'>
-                <Row>
-                    <Col>
+            <div className='text-center'>
+
                         {!user ?
                             <h3 className="display-5 my-5">Hello, Guest!</h3>
                             :
                             <h3 className="display-5 my-5">Hello, {user}!</h3>
                         }
-                    </Col>
-                </Row>
-            </Container>
+
+            </div>
         </>
     )
 }

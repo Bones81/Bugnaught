@@ -1,9 +1,9 @@
-import BugState from "./bug"
+import Bug from "./bug"
 
-interface ProjectState {
+interface Project {
     id: number,
     name: string,
-    bugs: BugState[]
+    bugs: Bug[]
   }
 
-export default ProjectState
+export default Project

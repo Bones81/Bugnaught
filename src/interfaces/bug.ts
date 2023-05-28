@@ -1,4 +1,4 @@
-interface BugState {
+interface Bug {
     id: number,
     name: string,
     pid: number,
@@ -6,4 +6,4 @@ interface BugState {
     description: string
   }
 
-export default BugState
+export default Bug

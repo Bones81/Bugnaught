@@ -1,19 +1,26 @@
-import { useState, useEffect, ReactEventHandler } from "react"
-import BugState from "../interfaces/bug"
-import ProjectState from "../interfaces/project"
+import { useState, useEffect } from "react"
 
+import Bug from "../interfaces/bug"
+import Project from "../interfaces/project"
 import DashboardProps from '../interfaces/dashboardprops'
+
+import ProjectView from "../ProjectView/projectView"
 
 const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
 
-    const [bugs, setBugs] = useState<BugState[]>([])
-    const [projects, setProjects] = useState<ProjectState[]>([])
+    const [bugs, setBugs] = useState<Bug[]>([])
+    const [projects, setProjects] = useState<Project[]>([])
+    const [projectID, setProjectID] = useState<Number | null>(null)
 
-    const handleSelectProject = (e: React.MouseEvent) => {
+    const handleSelectProject = (e: React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>, pid: Number) => {
         e.preventDefault()
-        console.log(e.target);
-        
+        props.setView("single-project-view")
+        setProjectID(pid)
+    }
 
+    const handleResetProjectsView = (e: any) => {
+        e.preventDefault()
+        props.setView("projects-view")
     }
     
     useEffect(() => {
@@ -53,7 +60,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                     return (
                                             <div 
                                                 key={project.id} 
-                                                onClick={(e: React.MouseEvent) => handleSelectProject(e)} 
+                                                onClick={(e) => handleSelectProject(e, project.id)} 
                                                 className="card rounded-0 shadow m-3 p-3 bg-primary col-10 col-lg-3"
                                             >
                                                 <h3 className="text-light">{ project.name }</h3>
@@ -82,6 +89,16 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                     case "assign-devs-view":
                         return (
                             <h1 className="text-center">Assign Devs View active</h1>
+                        )
+                    case "single-project-view":
+                        // Have to figure out how to pass a single project to this view
+                        const project = projects.filter( p => p.id === projectID )[0]
+                        console.log(project);
+                        
+                        return (
+                            <>
+                                <ProjectView project={project} handleResetProjectsView={handleResetProjectsView} />
+                            </>
                         )
                     default:
                         return <h1>Default switch case active: no valid view in state</h1>   
