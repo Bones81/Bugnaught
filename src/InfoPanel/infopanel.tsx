@@ -14,7 +14,7 @@ const InfoPanel: React.FunctionComponent = () => {
 
     return (
         <>
-            <Container fluid>
+            <Container fluid className='text-center'>
                 <Row>
                     <Col>
                         {!user ?

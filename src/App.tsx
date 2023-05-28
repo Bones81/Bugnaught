@@ -12,12 +12,12 @@ const App: React.FunctionComponent = () => {
     <>
       <Header setView={setView}/>
       <div className="container-fluid dash-container">
-        <div className="row justify-content-between align-items-center my-3 gx-5">
+        <div className="row justify-content-between align-items-center my-3 gx-3">
           <div className="col-sm-2">
             <InfoPanel />
           </div>
           <div className="col-sm-9">
-            <Dashboard view={view}/>
+            <Dashboard setView={setView} view={view}/>
           </div>
         </div>
       </div>

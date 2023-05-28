@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, ReactEventHandler } from "react"
 import BugState from "../interfaces/bug"
 import ProjectState from "../interfaces/project"
 
@@ -8,6 +8,13 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
 
     const [bugs, setBugs] = useState<BugState[]>([])
     const [projects, setProjects] = useState<ProjectState[]>([])
+
+    const handleSelectProject = (e: React.MouseEvent) => {
+        e.preventDefault()
+        console.log(e.target);
+        
+
+    }
     
     useEffect(() => {
       setBugs([
@@ -44,7 +51,11 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                 <div className="row justify-content-evenly">
                                 { projects.length ? projects.map( project => {
                                     return (
-                                            <div key={project.id} className="card rounded-0 shadow m-3 p-3 bg-primary col-10 col-lg-3">
+                                            <div 
+                                                key={project.id} 
+                                                onClick={(e: React.MouseEvent) => handleSelectProject(e)} 
+                                                className="card rounded-0 shadow m-3 p-3 bg-primary col-10 col-lg-3"
+                                            >
                                                 <h3 className="text-light">{ project.name }</h3>
                                                 <h5 className="text-dark">Bug List</h5>
                                                 <ul className="list-unstyled">

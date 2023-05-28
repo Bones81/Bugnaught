@@ -1,5 +1,6 @@
 interface DashboardProps {
-    view: String
+    view: String,
+    setView: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default DashboardProps
