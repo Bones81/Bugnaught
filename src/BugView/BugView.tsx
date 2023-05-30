@@ -23,6 +23,20 @@ const BugView = (props: any) => {
                 </div>
                 <Card.Text>Description: {props.bug.description}</Card.Text>
                 <Card.Text>(Attachment: Screenshot or Other Attachment Would Go Here)</Card.Text>
+
+                <div className="container-fluid my-3 p-3 border border-info">
+                    <ul className="comments-ul unstyled">
+                        <li className="comment-li mx-3 p-3">
+                            <div>
+                                <div className="d-flex justify-content-between align-items-end">
+                                    <h4 className='d-inline'>Commenter Name</h4>
+                                    <h6 className='d-inline'>Date/Time of Comment</h6>
+                                </div>
+                                <p>Comment Text Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque reprehenderit qui natus impedit dolores voluptates blanditiis, quam voluptatem nostrum rerum vel minus asperiores voluptatibus repudiandae amet delectus distinctio pariatur assumenda.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </Card.Body>
             <Card.Footer>
                 <div className="d-flex justify-content-evenly text-center">
