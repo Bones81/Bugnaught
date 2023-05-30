@@ -42,9 +42,10 @@ const BugView = (props: any) => {
                     <Row className="justify-content-center align-items-center">
                         <Col className='p-3 text-center'><Card.Subtitle className='fs-3'>BugID: {props.bug.id}</Card.Subtitle></Col>
                         <Col className='p-3 text-center'><Card.Subtitle className='fs-3'>ProjectID: {props.bug.pid}</Card.Subtitle></Col>
-                        <Col className='p-3 text-center'><Card.Subtitle className='fs-3'>Priority: {props.bug.priority}</Card.Subtitle></Col>
+                        <Col className='p-3 text-center'><Card.Subtitle className={`fs-3 rounded-pill p-2 ${props.bug.priority === 'high' ? "bg-danger" : props.bug.priority === 'medium' ? "bg-warning" : "bg-teal"}`}>Priority: {props.bug.priority}</Card.Subtitle></Col>
                     </Row>
                 </div>
+                <Card.Text className={`fs-1 text-center ${props.bug.status === "open" ? "bg-warning" : "bg-success"}`}>STATUS: {props.bug.status.toUpperCase()}</Card.Text>
                 <Card.Text className='fs-3 border border-3 px-5 py-3 my-5 shadow'><span className="text-primary fw-bold">Bug Description:</span> {props.bug.description}</Card.Text>
                 <Card.Text className="text-muted text-center my-5">(Attachment: Screenshot or Other Attachment Would Go Here)</Card.Text>
 
@@ -53,10 +54,10 @@ const BugView = (props: any) => {
                     <ul className="comments-ul list-unstyled">
                         { comments.length ? comments.map( (comment: CommentType) => {
                             return comment.bid === props.bug.id && (
-                            <>
+                            <div key={comment.id}>
                                 <hr/>
-                                <Comment key={comment.id} comment={comment}/>
-                            </>
+                                <Comment comment={comment}/>
+                            </div>
                             )
                         })
                         :
