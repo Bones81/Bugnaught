@@ -15,7 +15,7 @@ const ProjectView = (props: any) => {
             <Card.Header>
                 <Card.Title className='display-4 fw-bold text-center'>{props.project.name}</Card.Title>
             </Card.Header>
-            <Card.Body>
+            <Card.Body className='x-overflow-scroll'>
                 <h3 className="text-center fw-bold my-3">Logged Bugs</h3>
                 <Table className="text-center shadow my-5" hover>
                     <thead>
