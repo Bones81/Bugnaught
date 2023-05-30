@@ -44,7 +44,7 @@ const Header: React.FunctionComponent<HeaderProps> = (props: any) => {
     return (
         <>
             <Navbar variant="dark" bg="dark" expand="lg" sticky="top">
-                <Container fluid="lg">
+                <Container fluid>
                     <Navbar.Brand href="#" className="text-light fs-1 py-3">
                             Bugnaught <span className="left-glove">🥊</span>🪲🥊
                     </Navbar.Brand>

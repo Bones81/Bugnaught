@@ -29,7 +29,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
       setBugs([
         {id: 1, name: 'Data issue', pid: 1, status: "open", priority: 'high', description: 'No real data yet!'},
         {id: 2, name: 'Can\'t add comments', pid: 1, status: "open", priority: 'medium', description: 'Cannot add comments to bug yet!'},
-        {id: 3, name: 'Needs Bootstrap', pid: 1, status: "open", priority: 'low', description: 'Bootstrap not integrated!'},
+        {id: 3, name: 'Needs Bootstrap', pid: 1, status: "closed", priority: 'low', description: 'Bootstrap not integrated!'},
         {id: 4, name: 'Colors are bad', pid: 2, status: "open", priority: 'high', description: 'Needs better colors'},
         {id: 5, name: 'Blur not working on mobile', pid: 2, status: "open", priority: 'medium', description: 'Blur not working on mobile, even though it looks fine in devTools'},
         {id: 6, name: 'Database speed', pid: 2, status: "open", priority: 'low', description: 'Data takes too long to load from spun down servers!'},
@@ -51,11 +51,12 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
 
     return (
         <>
-            <h1 className="display-1 mb-5 text-center">Dashboard</h1>
             {(()=> { 
                 switch(props.view) {
                     case "projects-view":
                         return (
+                            <>
+                            <h1 className="display-1 mb-3 text-center">All Projects View</h1>
                             <div className="container">
                                 <div className="row justify-content-evenly">
                                 { projects.length ? projects.map( project => {
@@ -63,7 +64,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                             <div 
                                                 key={project.id} 
                                                 onClick={(e) => handleSelectProject(e, project.id)} 
-                                                className="card rounded shadow m-3 p-5 bg-primary col-10 col-lg-3 pointer"
+                                                className="card rounded shadow m-3 p-5 bg-primary col-10 col-xl-3 pointer"
                                             >
                                                 <h3 className="text-light text-center">{ project.name }</h3>
                                                 <h5 className="text-dark">Bug List</h5>
@@ -74,7 +75,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                                             key={bug.id} 
                                                             className="text-light"
                                                         >
-                                                            { bug.priority === 'high' ? '🔴' : bug.priority === 'medium' ? '🟡' : bug.priority === 'low' ? '🟢' : '✅' } {bug.name } 
+                                                            { bug.status === 'closed' ? '✅' : bug.priority === 'medium' ? '🟡' : bug.priority === 'low' ? '🟢' : '🔴' } {bug.name } 
                                                         </li>
                                                         )
                                                     }) : null }
@@ -86,6 +87,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                 }
                                 </div>
                             </div>
+                            </>
                         )
                     case "manage-roles-view":
                         return (
@@ -101,6 +103,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         
                         return (
                             <>
+                                <h1 className="display-1 mb-3 text-center">Single Project View</h1>
                                 <ProjectView 
                                     project={project} 
                                     setView={props.setView} 
@@ -111,9 +114,18 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         )
                     case "single-bug-view":
                         const bug = bugs.find( bug => bug.id === bugID )
+                        const associatedProject = () => {
+                            if(bug) {
+                                return projects.find( proj => proj.id === bug.pid)
+                            }
+                            return null
+                        }
 
                         return (
-                            <BugView bug={bug} projects={projects} setView={props.setView} />
+                            <>
+                                <h1 className="display-1 mb-3 text-center">Bug View</h1>
+                                <BugView bug={bug} projects={projects} project={associatedProject()} setView={props.setView} />
+                            </>
                         )
                     default:
                         return <h1>Default switch case active: no valid view in state</h1>   

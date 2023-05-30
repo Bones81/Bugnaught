@@ -25,6 +25,7 @@ const BugView = (props: any) => {
         {id: 16, author: "Jeff", createdAt: new Date('January 7, 2021 10:04:00').toLocaleString(), bid: 8, pid: 3, content: "I'm at the bodega getting a soft pretzel right now, but I'll get on it as soon as I get back from walking the dogs."},
         {id: 17, author: "Olivia", createdAt: new Date('January 18, 2021 18:52:21').toLocaleString(), bid: 9, pid: 3, content: "Not super important, but I could use one of you to handle this bug."},
         {id: 18, author: "Nathan", createdAt: new Date('April 5, 2021 22:34:12').toLocaleString(), bid: 9, pid: 3, content: "I suppose I have a few extra days to work on this."},
+        {id: 19, author: "Sujan", createdAt: new Date('April 5, 2022 22:34:12').toLocaleString(), bid: 3, pid: 1, content: "Should be fixed now."},
     ]
 
     const handleReturnToProjectView = (e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
@@ -34,18 +35,21 @@ const BugView = (props: any) => {
 
     return (
         <Card className='shadow'>
-            <Card.Header className='bg-light text-dark'>
-                <Card.Title className='display-4 fw-bolder text-center'>Bug: {props.bug.name}</Card.Title>
+            <Card.Header className='bg-secondary text-light'>
+                <Card.Title className='display-3 text-center'>{props.project.name}</Card.Title>
+            </Card.Header>
+            <Card.Header className='bg-secondary text-light'>
+                <Card.Subtitle className='display-5 fw-bolder text-center'>Bug Title: <span className={props.bug.status === "closed" ? "line-through" : ""}>{props.bug.name}</span></Card.Subtitle>
             </Card.Header>
             <Card.Body>
                 <div className="container bg-info rounded-pill my-3 shadow">
                     <Row className="justify-content-center align-items-center">
-                        <Col className='p-3 text-center'><Card.Subtitle className='fs-3'>BugID: {props.bug.id}</Card.Subtitle></Col>
-                        <Col className='p-3 text-center'><Card.Subtitle className='fs-3'>ProjectID: {props.bug.pid}</Card.Subtitle></Col>
-                        <Col className='p-3 text-center'><Card.Subtitle className={`fs-3 rounded-pill p-2 ${props.bug.priority === 'high' ? "bg-danger" : props.bug.priority === 'medium' ? "bg-warning" : "bg-teal"}`}>Priority: {props.bug.priority}</Card.Subtitle></Col>
+                        <Col className='p-3 text-center'><Card.Subtitle className='fs-4'>BugID: {props.bug.id}</Card.Subtitle></Col>
+                        {/* <Col className='p-3 text-center'><Card.Subtitle className='fs-4'>ProjectID: {props.bug.pid}</Card.Subtitle></Col> */}
+                        <Col className='p-3 text-center'><Card.Subtitle className={`fs-4 rounded-pill p-2 ${props.bug.priority === 'high' ? "bg-danger" : props.bug.priority === 'medium' ? "bg-warning" : "bg-teal"}`}>Priority: {props.bug.priority}</Card.Subtitle></Col>
                     </Row>
                 </div>
-                <Card.Text className={`fs-1 text-center ${props.bug.status === "open" ? "bg-warning" : "bg-success"}`}>STATUS: {props.bug.status.toUpperCase()}</Card.Text>
+                <Card.Text className={`fs-1 p-3 text-center ${props.bug.status === "open" ? "bg-warning" : "bg-success"}`}>STATUS: {props.bug.status.toUpperCase()}</Card.Text>
                 <Card.Text className='fs-3 border border-3 px-5 py-3 my-5 shadow'><span className="text-primary fw-bold">Bug Description:</span> {props.bug.description}</Card.Text>
                 <Card.Text className="text-muted text-center my-5">(Attachment: Screenshot or Other Attachment Would Go Here)</Card.Text>
 

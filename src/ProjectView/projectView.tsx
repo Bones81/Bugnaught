@@ -22,6 +22,7 @@ const ProjectView = (props: any) => {
                         <tr className='bg-secondary text-light'>
                             <th>Id</th>
                             <th className='text-start'>Bug Title</th>
+                            <th>Status</th>
                             <th>Priority</th>
                             <th>Description</th>
                         </tr>
@@ -29,9 +30,10 @@ const ProjectView = (props: any) => {
                     <tbody>
                     {props.project.bugs.length ? props.project.bugs.map( (bug: Bug) => {
                         return (
-                        <tr key={bug.id} onClick={ (e) => handleChangeToBugView(e, bug.id) } className="pointer">
+                        <tr key={bug.id} onClick={ (e) => handleChangeToBugView(e, bug.id) } className={`pointer ${bug.status === "closed" ? "text-muted line-through" : "text-dark"}`}>
                             <td>{bug.id}</td>
                             <td className='text-start'>{bug.name}</td>
+                            <td>{bug.status.toUpperCase()}</td>
                             <td>{bug.priority}</td>
                             <td>{bug.description}</td>
                         </tr>                                            
