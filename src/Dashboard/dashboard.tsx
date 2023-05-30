@@ -24,7 +24,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
         e.preventDefault()
         props.setView("projects-view")
     }
-    
+
     useEffect(() => {
       setBugs([
         {id: 1, name: 'Needs real data', pid: 1, priority: 'high', description: 'No real data yet!'},
