@@ -43,7 +43,7 @@ const Header: React.FunctionComponent<HeaderProps> = (props: any) => {
 
     return (
         <>
-            <Navbar variant="dark" bg="dark" expand="lg">
+            <Navbar variant="dark" bg="dark" expand="lg" sticky="top">
                 <Container fluid="lg">
                     <Navbar.Brand href="#" className="text-light fs-1 py-3">
                             Bugnaught <span className="left-glove">🥊</span>🪲🥊
@@ -55,7 +55,7 @@ const Header: React.FunctionComponent<HeaderProps> = (props: any) => {
                         <Nav.Link href="#" id="manage-roles-view" onClick={handleClick}>Manage Roles</Nav.Link>
                         <Nav.Link href="#" id="assign-devs-view" onClick={handleClick}>Assign Devs</Nav.Link>
                     </Nav>
-                    <Button type="button" variant="outline-primary" onClick={handleShow} >Login</Button>
+                    <Button type="button" variant="outline-primary" size="lg" onClick={handleShow} >Login</Button>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

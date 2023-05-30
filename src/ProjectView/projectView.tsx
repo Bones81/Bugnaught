@@ -11,14 +11,15 @@ const ProjectView = (props: any) => {
     }
 
     return (
-        <Card>
+        <Card className='shadow container-fluid'>
             <Card.Header>
-                <Card.Title className='display-4 text-center'>{props.project.name}</Card.Title>
+                <Card.Title className='display-4 fw-bold text-center'>{props.project.name}</Card.Title>
             </Card.Header>
             <Card.Body>
-                <Table className="text-center" hover>
+                <h3 className="text-center fw-bold my-3">Logged Bugs</h3>
+                <Table className="text-center shadow my-5" hover>
                     <thead>
-                        <tr>
+                        <tr className='bg-secondary text-light'>
                             <th>Id</th>
                             <th className='text-start'>Bug Title</th>
                             <th>Priority</th>
@@ -44,7 +45,7 @@ const ProjectView = (props: any) => {
             <Card.Footer>
                 <div className="d-flex justify-content-evenly text-center">
                     <Button variant="outline" className="disabled"><span className="line-through">Add New Bug</span></Button>
-                    <Button onClick={props.handleResetProjectsView} variant="primary">Back to All Projects</Button>
+                    <Button onClick={props.handleResetProjectsView} variant="primary" size='lg'>Back to All Projects</Button>
                     </div>
             </Card.Footer>
         </Card>

@@ -27,7 +27,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
 
     useEffect(() => {
       setBugs([
-        {id: 1, name: 'Needs real data', pid: 1, priority: 'high', description: 'No real data yet!'},
+        {id: 1, name: 'Data issue', pid: 1, priority: 'high', description: 'No real data yet!'},
         {id: 2, name: 'Can\'t add comments', pid: 1, priority: 'medium', description: 'Cannot add comments to bug yet!'},
         {id: 3, name: 'Needs Bootstrap', pid: 1, priority: 'closed', description: 'Bootstrap not integrated!'},
         {id: 4, name: 'Colors are bad', pid: 2, priority: 'high', description: 'Needs better colors'},
@@ -51,7 +51,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
 
     return (
         <>
-            <h1 className="display-1 text-center">Dashboard</h1>
+            <h1 className="display-1 mb-5 text-center">Dashboard</h1>
             {(()=> { 
                 switch(props.view) {
                     case "projects-view":
@@ -63,9 +63,9 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                             <div 
                                                 key={project.id} 
                                                 onClick={(e) => handleSelectProject(e, project.id)} 
-                                                className="card rounded-0 shadow m-3 p-3 bg-primary col-10 col-lg-3 pointer"
+                                                className="card rounded shadow m-3 p-5 bg-primary col-10 col-lg-3 pointer"
                                             >
-                                                <h3 className="text-light">{ project.name }</h3>
+                                                <h3 className="text-light text-center">{ project.name }</h3>
                                                 <h5 className="text-dark">Bug List</h5>
                                                 <ul className="list-unstyled bugs-ul">
                                                     { project.bugs.length ? project.bugs.map(bug => {
@@ -105,7 +105,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                     project={project} 
                                     setView={props.setView} 
                                     setBugID={setBugID} 
-                                    handleResetProjectsView={handleResetProjectsView} 
+                                    handleResetProjectsView={handleResetProjectsView}
                                 />
                             </>
                         )

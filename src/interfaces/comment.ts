@@ -1,8 +1,10 @@
-interface Comment {
+interface CommentType {
     id: number,
     author: string,
-    createdAt: Date,
+    createdAt: string,
     bid: number,
     pid: number,
     content: string
 }
+
+export default CommentType

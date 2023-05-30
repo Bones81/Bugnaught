@@ -10,13 +10,13 @@ const App: React.FunctionComponent = () => {
 
   return (
     <>
-      <Header setView={setView}/>
-      <div className="container-fluid dash-container">
+      <Header setView={setView} />
+      <div className="container-fluid dash-container mb-5">
         <div className="row justify-content-between align-items-center my-3 gx-3">
-          <div className="col-md-2">
+          <div className="col-xl-2">
             <InfoPanel />
           </div>
-          <div className="col-md-9">
+          <div className="col-xl-9">
             <Dashboard setView={setView} view={view}/>
           </div>
         </div>
