@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import "./dashboard.css"
 
 import Bug from "../interfaces/bug"
 import Project from "../interfaces/project"
@@ -64,22 +65,24 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                             <div 
                                                 key={project.id} 
                                                 onClick={(e) => handleSelectProject(e, project.id)} 
-                                                className="card rounded shadow m-3 p-5 bg-primary col-10 col-xl-3 pointer"
+                                                className="card rounded shadow m-3 p-5 bg-primary col-10 col-xl-3 pointer justify-content-between"
                                             >
                                                 <h3 className="text-light text-center">{ project.name }</h3>
-                                                <h5 className="text-dark">Bug List</h5>
-                                                <ul className="list-unstyled bugs-ul">
-                                                    { project.bugs.length ? project.bugs.map(bug => {
-                                                        return ( 
-                                                        <li 
-                                                            key={bug.id} 
-                                                            className="text-light"
-                                                        >
-                                                            { bug.status === 'closed' ? '✅' : bug.priority === 'medium' ? '🟡' : bug.priority === 'low' ? '🟢' : '🔴' } {bug.name } 
-                                                        </li>
-                                                        )
-                                                    }) : null }
-                                                </ul>
+                                                <div>
+                                                    <h5 className="text-dark">Bug List</h5>
+                                                    <ul className="list-unstyled bugs-ul">
+                                                        { project.bugs.length ? project.bugs.map(bug => {
+                                                            return (
+                                                            <li
+                                                                key={bug.id}
+                                                                className="text-light"
+                                                            >
+                                                                { bug.status === 'closed' ? '✅' : bug.priority === 'medium' ? '🟡' : bug.priority === 'low' ? '🟢' : '🔴' } {bug.name }
+                                                            </li>
+                                                            )
+                                                        }) : null }
+                                                    </ul>
+                                                </div>
                                             </div>
                                     )}) 
                                     : 
@@ -91,11 +94,17 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         )
                     case "manage-roles-view":
                         return (
-                            <h1 className="text-center">Manage Roles View active</h1>
-                        )
+                            <>
+                                <h1 className="display-1 mb-3 text-center">Manage Roles</h1>
+                                <h6 className="text-center">Coming Soon!</h6>
+                            </>
+                            )
                     case "assign-devs-view":
                         return (
-                            <h1 className="text-center">Assign Devs View active</h1>
+                            <>
+                                <h1 className="display-1 mb-3 text-center">Assign Devs</h1>
+                                <h6 className="text-center">Coming Soon!</h6>
+                            </>
                         )
                     case "single-project-view":
                         // Have to figure out how to pass a single project to this view
