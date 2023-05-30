@@ -1,8 +1,15 @@
 import { Card, Table, Button } from 'react-bootstrap'
 import "./projectView.css"
-import Bug from '../interfaces/bug.ts'
+import Bug from '../interfaces/bug'
 
 const ProjectView = (props: any) => {
+
+    const handleChangeToBugView = (e: React.MouseEvent<HTMLTableRowElement> | React.TouchEvent<HTMLTableRowElement>, bid: Number) => {
+        e.preventDefault()
+        props.setBugID(bid)
+        props.setView("single-bug-view")
+    }
+
     return (
         <Card>
             <Card.Header>
@@ -21,7 +28,7 @@ const ProjectView = (props: any) => {
                     <tbody>
                     {props.project.bugs.length ? props.project.bugs.map( (bug: Bug) => {
                         return (
-                        <tr key={bug.id}>
+                        <tr key={bug.id} onClick={ (e) => handleChangeToBugView(e, bug.id) } className="pointer">
                             <td>{bug.id}</td>
                             <td className='text-start'>{bug.name}</td>
                             <td>{bug.priority}</td>

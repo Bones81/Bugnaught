@@ -5,11 +5,13 @@ import Project from "../interfaces/project"
 import DashboardProps from '../interfaces/dashboardprops'
 
 import ProjectView from "../ProjectView/projectView"
+import BugView from "../BugView/BugView"
 
 const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
 
     const [bugs, setBugs] = useState<Bug[]>([])
     const [projects, setProjects] = useState<Project[]>([])
+    const [bugID, setBugID] = useState<Number | null>(null)
     const [projectID, setProjectID] = useState<Number | null>(null)
 
     const handleSelectProject = (e: React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>, pid: Number) => {
@@ -61,14 +63,17 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                             <div 
                                                 key={project.id} 
                                                 onClick={(e) => handleSelectProject(e, project.id)} 
-                                                className="card rounded-0 shadow m-3 p-3 bg-primary col-10 col-lg-3"
+                                                className="card rounded-0 shadow m-3 p-3 bg-primary col-10 col-lg-3 pointer"
                                             >
                                                 <h3 className="text-light">{ project.name }</h3>
                                                 <h5 className="text-dark">Bug List</h5>
-                                                <ul className="list-unstyled">
+                                                <ul className="list-unstyled bugs-ul">
                                                     { project.bugs.length ? project.bugs.map(bug => {
                                                         return ( 
-                                                        <li key={bug.id} className="text-light">
+                                                        <li 
+                                                            key={bug.id} 
+                                                            className="text-light"
+                                                        >
                                                             { bug.priority === 'high' ? '🔴' : bug.priority === 'medium' ? '🟡' : bug.priority === 'low' ? '🟢' : '✅' } {bug.name } 
                                                         </li>
                                                         )
@@ -96,8 +101,19 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         
                         return (
                             <>
-                                <ProjectView project={project} handleResetProjectsView={handleResetProjectsView} />
+                                <ProjectView 
+                                    project={project} 
+                                    setView={props.setView} 
+                                    setBugID={setBugID} 
+                                    handleResetProjectsView={handleResetProjectsView} 
+                                />
                             </>
+                        )
+                    case "single-bug-view":
+                        const bug = bugs.find( bug => bug.id === bugID )
+
+                        return (
+                            <BugView bug={bug} projects={projects} setView={props.setView} />
                         )
                     default:
                         return <h1>Default switch case active: no valid view in state</h1>   
