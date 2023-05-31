@@ -29,7 +29,10 @@ const BugView = (props: any) => {
         {id: 19, author: "Sujan", createdAt: new Date('April 5, 2022 22:34:12').toLocaleString(), bid: 3, pid: 1, content: "Should be fixed now."},
     ]
 
-    const [comments, setComments] = useState<CommentType[]>([])
+    // This two lines should set the initial comments array from localStorage, if it already exists; otherwise it will initialize comments with an empty array
+    const initialComments: CommentType[] = localStorage.getItem("BUGNAUGHT_COMMENTS") && JSON.parse(localStorage.getItem("BUGNAUGHT_COMMENTS") || "[]") || []
+    const [comments, setComments] = useState<CommentType[]>(initialComments)
+
     const [commentText, setCommentText] = useState<string>('')
 
     const handleCommentTextChange = (e: any) => {
@@ -53,20 +56,14 @@ const BugView = (props: any) => {
             content: commentText
         }
 
-        console.log('setComments not yet run');
         setComments([...comments, newComment])
-        console.log('setComments run');
-
-        console.log('setCommentText not yet run')
         setCommentText('')
-        console.log('setCommentText run');
-        
-        
+
     }
 
-    useEffect(() => {
-        setComments(mockComments)
-    }, [])
+    useEffect(() => { // update localStorage whenever comments array gets updated
+        localStorage.setItem("BUGNAUGHT_COMMENTS", JSON.stringify(comments))
+    }, [comments])
 
     return (
         <Card className='shadow'>
