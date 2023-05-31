@@ -28,15 +28,15 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
 
     useEffect(() => {
       setBugs([
-        {id: 1, name: 'Data issue', pid: 1, status: "open", priority: 'high', description: 'No real data yet!'},
-        {id: 2, name: 'Can\'t add comments', pid: 1, status: "open", priority: 'medium', description: 'Cannot add comments to bug yet!'},
-        {id: 3, name: 'Needs Bootstrap', pid: 1, status: "closed", priority: 'low', description: 'Bootstrap not integrated!'},
-        {id: 4, name: 'Colors are bad', pid: 2, status: "open", priority: 'high', description: 'Needs better colors'},
-        {id: 5, name: 'Blur not working on mobile', pid: 2, status: "open", priority: 'medium', description: 'Blur not working on mobile, even though it looks fine in devTools'},
-        {id: 6, name: 'Database speed', pid: 2, status: "open", priority: 'low', description: 'Data takes too long to load from spun down servers!'},
-        {id: 7, name: 'Layout too simple', pid: 3, status: "open", priority: 'high', description: 'Needs pizazz; maybe parallax?'},
-        {id: 8, name: 'Old images', pid: 3, status: "open", priority: 'medium', description: 'Needs some fresh imagery'},
-        {id: 9, name: 'Colors', pid: 3, status: "open", priority: 'low', description: 'Too much pastel; Find new, more dramatic color scheme.'}
+        {id: 1, name: 'Data issue', pid: 1, status: "open", priority: 'high', developer: "Nathan", description: 'No real data yet!'},
+        {id: 2, name: 'Can\'t add comments', pid: 1, status: "open", priority: 'medium', developer: "Nathan", description: 'Cannot add comments to bug yet!'},
+        {id: 3, name: 'Needs Bootstrap', pid: 1, status: "closed", priority: 'low', developer: "Sujan", description: 'Bootstrap not integrated!'},
+        {id: 4, name: 'Colors are bad', pid: 2, status: "open", priority: 'high', developer: "", description: 'Needs better colors'},
+        {id: 5, name: 'Blur not working on mobile', pid: 2, status: "open", priority: 'medium', developer: "", description: 'Blur not working on mobile, even though it looks fine in devTools'},
+        {id: 6, name: 'Database speed', pid: 2, status: "open", priority: 'low', developer: "", description: 'Data takes too long to load from spun down servers!'},
+        {id: 7, name: 'Layout too simple', pid: 3, status: "open", priority: 'high', developer: "", description: 'Needs pizazz; maybe parallax?'},
+        {id: 8, name: 'Old images', pid: 3, status: "open", priority: 'medium', developer: "", description: 'Needs some fresh imagery'},
+        {id: 9, name: 'Colors', pid: 3, status: "open", priority: 'low', developer: "", description: 'Too much pastel; Find new, more dramatic color scheme.'}
       ])
   
 

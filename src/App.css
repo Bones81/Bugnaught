@@ -33,9 +33,11 @@ body {
 .bg-orange {
   background: var(--bs-orange);
 }
+
 .bg-teal {
   background: var(--bs-teal);
 }
+
 .bg-indigo {
   background: var(--bs-indigo);
 }

@@ -24,6 +24,7 @@ const ProjectView = (props: any) => {
                             <th className='text-start'>Bug Title</th>
                             <th>Status</th>
                             <th>Priority</th>
+                            <th>Assigned To</th>
                             <th>Description</th>
                         </tr>
                     </thead>
@@ -35,6 +36,7 @@ const ProjectView = (props: any) => {
                             <td className='text-start'>{bug.name}</td>
                             <td>{bug.status.toUpperCase()}</td>
                             <td>{bug.priority}</td>
+                            <td>{bug.developer || "None assigned" }</td>
                             <td>{bug.description}</td>
                         </tr>                                            
                     )})

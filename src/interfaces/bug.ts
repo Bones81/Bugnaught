@@ -4,7 +4,8 @@ interface Bug {
     pid: number,
     status: string,
     priority: string,
-    description: string
+    description: string,
+    developer: string
   }
 
 export default Bug

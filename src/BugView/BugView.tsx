@@ -1,12 +1,13 @@
-import { Card, Button, Row, Col } from 'react-bootstrap'
+import { useState, useEffect } from 'react'
+import { Card, Button, Row, Col, Form, FormControl } from 'react-bootstrap'
 import "./BugView.css"
 import Project from '../interfaces/project.ts'
 import CommentType from '../interfaces/comment.ts'
 import Comment from '../Comment/comment.tsx'
 
 const BugView = (props: any) => {
-
-    const comments: CommentType[] = [
+    
+    const mockComments: CommentType[] = [
         {id: 1, author: "Nathan", createdAt: new Date('June 17, 2019 13:24:00').toLocaleString(), bid: 1, pid: 1, content: "Needs dev assignment. Anyone want to take this one?"},
         {id: 2, author: "Sujan", createdAt: new Date('June 17, 2019 15:24:00').toLocaleString(), bid: 1, pid: 1, content: "I can take it"},
         {id: 3, author: "Jeff", createdAt: new Date('June 17, 2019 16:24:00').toLocaleString(), bid: 2, pid: 1, content: "Needs dev assignment. Anyone want to take this one?"},
@@ -28,30 +29,70 @@ const BugView = (props: any) => {
         {id: 19, author: "Sujan", createdAt: new Date('April 5, 2022 22:34:12').toLocaleString(), bid: 3, pid: 1, content: "Should be fixed now."},
     ]
 
+    const [comments, setComments] = useState<CommentType[]>([])
+    const [commentText, setCommentText] = useState<string>('')
+
+    const handleCommentTextChange = (e: any) => {
+        setCommentText(e.target.value)
+    }
+
     const handleReturnToProjectView = (e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
         e.preventDefault()
         props.setView("single-project-view")
     }
 
+    const handleAddComment = (e: any) => {
+        e.preventDefault()
+
+        const newComment = {
+            id: comments.length + 1,
+            author: "Logged in user name would go here",
+            createdAt: new Date().toLocaleString(),
+            bid: props.bug.id,
+            pid: props.project.id,
+            content: commentText
+        }
+
+        console.log('setComments not yet run');
+        setComments([...comments, newComment])
+        console.log('setComments run');
+
+        console.log('setCommentText not yet run')
+        setCommentText('')
+        console.log('setCommentText run');
+        
+        
+    }
+
+    useEffect(() => {
+        setComments(mockComments)
+    }, [])
+
     return (
         <Card className='shadow'>
             <Card.Header className='bg-secondary text-light'>
-                <Card.Title className='display-3 text-center'>{props.project.name}</Card.Title>
+                <Card.Title className='display-3 text-center fw-bold'>{props.project.name}</Card.Title>
             </Card.Header>
             <Card.Header className='bg-secondary text-light'>
                 <Card.Subtitle className='display-5 fw-bolder text-center'>Bug Title: <span className={props.bug.status === "closed" ? "line-through" : ""}>{props.bug.name}</span></Card.Subtitle>
             </Card.Header>
             <Card.Body>
-                <div className="container bg-info rounded-pill my-3 shadow">
+                <div className="container bg-info rounded-pill mb-3 shadow">
                     <Row className="justify-content-center align-items-center">
                         <Col className='p-3 text-center'><Card.Subtitle className='fs-4'>BugID: {props.bug.id}</Card.Subtitle></Col>
                         {/* <Col className='p-3 text-center'><Card.Subtitle className='fs-4'>ProjectID: {props.bug.pid}</Card.Subtitle></Col> */}
                         <Col className='p-3 text-center'><Card.Subtitle className={`fs-4 rounded-pill p-2 ${props.bug.priority === 'high' ? "bg-danger" : props.bug.priority === 'medium' ? "bg-warning" : "bg-teal"}`}>Priority: {props.bug.priority}</Card.Subtitle></Col>
                     </Row>
                 </div>
-                <Card.Text className={`fs-1 p-3 text-center ${props.bug.status === "open" ? "bg-warning" : "bg-success"}`}>STATUS: {props.bug.status.toUpperCase()}</Card.Text>
-                <Card.Text className='fs-3 border border-3 px-5 py-3 my-5 shadow'><span className="text-primary fw-bold">Bug Description:</span> {props.bug.description}</Card.Text>
-                <Card.Text className="text-muted text-center my-5">(Attachment: Screenshot or Other Attachment Would Go Here)</Card.Text>
+                <Card.Text className={`fs-1 p-3 text-center ${
+                    props.bug.status === "open" ? "bg-primary" : 
+                    props.bug.status === "assigned" ? "bg-warning" : 
+                    props.bug.status === "in-progress" ? "bg-teal" : 
+                    "bg-success"}`}
+                >STATUS: {props.bug.status.toUpperCase()} {props.bug.status === "closed" ? "🏁" : null}</Card.Text>
+                <h4 className="mt-2 p-2 text-center">Assigned to: {props.bug.developer}</h4>
+                <Card.Text className='fs-3 border border-3 px-5 py-3 my-3 shadow'><span className="text-primary fw-bold">Bug Description:</span> {props.bug.description}</Card.Text>
+                <Card.Text className="text-muted text-center my-3">(Attachment: Screenshot or Other Attachment Would Go Here)</Card.Text>
 
                 <div className="container-fluid my-3 p-3 border border-info rounded shadow-lg">
                     <h3 className="text-center fw-3">Comments</h3>
@@ -63,16 +104,19 @@ const BugView = (props: any) => {
                                 <Comment comment={comment}/>
                             </div>
                             )
-                        })
+                        }).reverse() // shows comments in "most recent" order
                         :
                             <h1 className='text-center'>No Comments Yet</h1>
                         }
                     </ul>
                 </div>
+                <Form onSubmit={handleAddComment} className='d-flex'>
+                    <FormControl type="textarea" onChange={handleCommentTextChange} name="comment-content" id="comment-content" placeholder='Enter your comment here'></FormControl>
+                    <Button type="submit" variant="warning" className="btn btn-lg m-3 outline border border-2" >Add Comment</Button>
+                </Form>
             </Card.Body>
             <Card.Footer className='py-4'>
                 <div className="d-flex justify-content-evenly text-center">
-                    <Button variant="outline" className="disabled"><span className="line-through">Add Comment</span></Button>
                     <Button onClick={handleReturnToProjectView} variant="primary" size='lg'>Back to Project: { props.projects.find( (p:Project) => props.bug.pid === p.id).name }</Button>
                     </div>
             </Card.Footer>
