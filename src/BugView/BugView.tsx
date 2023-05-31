@@ -29,6 +29,7 @@ const BugView = (props: any) => {
         {id: 19, author: "Sujan", createdAt: new Date('April 5, 2022 22:34:12').toLocaleString(), bid: 3, pid: 1, content: "Should be fixed now."},
     ]
 
+    // localStorage.removeItem("BUGNAUGHT_COMMENTS") // development use only when resetting of comments is needed
     // This two lines should set the initial comments array from localStorage, if it already exists; otherwise it will initialize comments with an empty array
     const initialComments: CommentType[] = localStorage.getItem("BUGNAUGHT_COMMENTS") && JSON.parse(localStorage.getItem("BUGNAUGHT_COMMENTS") || "[]") || mockComments
     const [comments, setComments] = useState<CommentType[]>(initialComments)
@@ -56,6 +57,7 @@ const BugView = (props: any) => {
             content: commentText
         }
 
+        
         setComments([...comments, newComment])
         setCommentText('')
 
@@ -108,7 +110,7 @@ const BugView = (props: any) => {
                     </ul>
                 </div>
                 <Form onSubmit={handleAddComment} className='d-flex'>
-                    <FormControl type="textarea" onChange={handleCommentTextChange} name="comment-content" id="comment-content" placeholder='Enter your comment here'></FormControl>
+                    <FormControl as="textarea" onChange={handleCommentTextChange} name="comment-content" id="comment-content" placeholder='Enter your comment here' value={commentText}></FormControl>
                     <Button type="submit" variant="warning" className="btn btn-lg m-3 outline border border-2" >Add Comment</Button>
                 </Form>
             </Card.Body>
