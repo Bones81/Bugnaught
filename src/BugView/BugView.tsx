@@ -30,7 +30,7 @@ const BugView = (props: any) => {
     ]
 
     // This two lines should set the initial comments array from localStorage, if it already exists; otherwise it will initialize comments with an empty array
-    const initialComments: CommentType[] = localStorage.getItem("BUGNAUGHT_COMMENTS") && JSON.parse(localStorage.getItem("BUGNAUGHT_COMMENTS") || "[]") || []
+    const initialComments: CommentType[] = localStorage.getItem("BUGNAUGHT_COMMENTS") && JSON.parse(localStorage.getItem("BUGNAUGHT_COMMENTS") || "[]") || mockComments
     const [comments, setComments] = useState<CommentType[]>(initialComments)
 
     const [commentText, setCommentText] = useState<string>('')
