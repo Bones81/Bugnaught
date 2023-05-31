@@ -48,6 +48,11 @@ const BugView = (props: any) => {
     const handleAddComment = (e: any) => {
         e.preventDefault()
 
+        if(!commentText) {
+            alert("No text entered");
+            return
+        }
+
         const newComment = {
             id: comments.length + 1,
             author: "Logged in user name would go here",
