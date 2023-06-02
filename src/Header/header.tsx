@@ -45,17 +45,17 @@ const Header: React.FunctionComponent<HeaderProps> = (props: any) => {
         <>
             <Navbar variant="dark" bg="dark" expand="lg" sticky="top">
                 <Container fluid>
-                    <Navbar.Brand href="#" className="text-light fs-1 py-3">
+                    <Navbar.Brand href="#" className="text-light fs-1 py-3 ms-5">
                             Bugnaught <span className="left-glove">🥊</span>🪲🥊
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto">
+                    <Nav className="ms-auto me-3">
                         <Nav.Link href="#" id="projects-view" onClick={handleClick}>Projects</Nav.Link>
                         <Nav.Link href="#" id="manage-roles-view" onClick={handleClick}>Manage Roles</Nav.Link>
                         <Nav.Link href="#" id="assign-devs-view" onClick={handleClick}>Assign Devs</Nav.Link>
+                        <Button type="button" variant="outline-primary" className="ms-3 me-5" size="lg" onClick={handleShow} >Login</Button>
                     </Nav>
-                    <Button type="button" variant="outline-primary" size="lg" onClick={handleShow} >Login</Button>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
