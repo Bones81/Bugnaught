@@ -35,7 +35,12 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
         e.preventDefault()
         props.setView("user-bugs-view")
         console.log("Now viewing user bugs for " + user);
-        
+    }
+
+    const handleGetSingleUserView = (e: any) => {
+        e.preventDefault()
+        props.setView("single-user-view")
+        console.log("Now viewing single user view for " + user);
     }
 
     const [user, setUser] = useState('')
@@ -60,7 +65,7 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
                 <ul className="d-flex flex-xl-column align-items-center shadow bg-secondary m-3 p-3 border border-1 rounded">
                     <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 px-xl-5 fs-3 text-decoration-none" onClick={handleShowAddProject}>Add Project</li>
                     <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 px-xl-5 fs-3 text-decoration-none" onClick={handleViewUserBugs}>View My Bugs</li>
-                    <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 px-xl-5 fs-3 text-decoration-none">User Info</li>
+                    <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 px-xl-5 fs-3 text-decoration-none" onClick={handleGetSingleUserView}>User Info</li>
                 </ul>
 
                 {/* Add Project  */}

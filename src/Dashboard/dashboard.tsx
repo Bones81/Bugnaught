@@ -142,6 +142,13 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                 <h6 className="text-center">Coming Soon!</h6>
                             </>
                         )
+                    case "single-user-view":
+                        return (
+                            <>
+                                <h1 className="display-1 mb-3 text-center">Single User View</h1>
+                                <h6 className="text-center">Coming Soon!</h6>
+                            </>
+                        )
                     default:
                         return <h1>Default switch case active: no valid view in state</h1>   
                 }})()
