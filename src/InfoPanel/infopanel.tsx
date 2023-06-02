@@ -18,13 +18,13 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
 
     const handleAddProject = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        // const newProj = {
-        //     id: props.projects.length + 1,
-        //     name: projectName,
-        //     bugs: []
-        // }
+        const newProj = {
+            id: props.projects.length + 1,
+            name: projectName,
+            bugs: []
+        }
 
-        // props.projects.push(newProj)
+        props.setProjects([...props.projects, newProj])
         console.log('This should add new project info to projects list');
         setProjectName("")
         setShowAddProject(false)

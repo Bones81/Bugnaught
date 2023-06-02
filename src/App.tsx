@@ -17,8 +17,8 @@ const App: React.FunctionComponent = () => {
       <Header setView={setView} />
       <div className="container-fluid dash-container mb-5">
         <div className="row justify-content-between align-items-center my-3 gx-3">
-          <div className="col-xl-5">
-            <InfoPanel projects={projects} setView={setView}/>
+          <div className="col-xl-5 align-self-start mt-5">
+            <InfoPanel projects={projects} setProjects={setProjects} setView={setView}/>
           </div>
           <div className="col-xl-6">
             <Dashboard projects={projects} setProjects={setProjects} setView={setView} view={view}/>
