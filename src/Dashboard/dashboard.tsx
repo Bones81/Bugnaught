@@ -11,7 +11,6 @@ import BugView from "../BugView/BugView"
 const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
 
     const [bugs, setBugs] = useState<Bug[]>([])
-    const [projects, setProjects] = useState<Project[]>([])
     const [bugID, setBugID] = useState<Number | null>(null)
     const [projectID, setProjectID] = useState<Number | null>(null)
 
@@ -43,7 +42,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
     }, [])
 
     useEffect(() => {
-        setProjects([
+        props.setProjects([
             {id: 1, name: 'Bug Tracker App', bugs: [...bugs.slice(0,3)]},
             {id: 2, name: 'Portfolio Site', bugs: [...bugs.slice(3,6)]},
             {id: 3, name: 'Actor Website', bugs: [...bugs.slice(6,9)]},
@@ -60,7 +59,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                             <h1 className="display-1 mb-3 text-center">All Projects View</h1>
                             <div className="container">
                                 <div className="row justify-content-center">
-                                { projects.length ? projects.map( project => {
+                                { props.projects.length ? props.projects.map( (project: Project) => {
                                     return (
                                             <div 
                                                 key={project.id} 
@@ -71,7 +70,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                                 <div>
                                                     <h5 className="text-dark">Bug List</h5>
                                                     <ul className="list-unstyled bugs-ul">
-                                                        { project.bugs.length ? project.bugs.map(bug => {
+                                                        { project.bugs.length ? project.bugs.map((bug: Bug) => {
                                                             return (
                                                             <li
                                                                 key={bug.id}
@@ -108,7 +107,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         )
                     case "single-project-view":
                         // Have to figure out how to pass a single project to this view
-                        const project = projects.find( p => p.id === projectID )
+                        const project = props.projects.find( (p: Project) => p.id === projectID )
                         
                         return (
                             <>
@@ -125,7 +124,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         const bug = bugs.find( bug => bug.id === bugID )
                         const associatedProject = () => {
                             if(bug) {
-                                return projects.find( proj => proj.id === bug.pid)
+                                return props.projects.find( (proj: Project) => proj.id === bug.pid)
                             }
                             return null
                         }
@@ -133,7 +132,14 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         return (
                             <>
                                 <h1 className="display-1 mb-3 text-center">Bug View</h1>
-                                <BugView bug={bug} projects={projects} project={associatedProject()} setView={props.setView} />
+                                <BugView bug={bug} projects={props.projects} project={associatedProject()} setView={props.setView} />
+                            </>
+                        )
+                    case "user-bugs-view":
+                        return (
+                            <>
+                                <h1 className="display-1 mb-3 text-center">User Bugs View</h1>
+                                <h6 className="text-center">Coming Soon!</h6>
                             </>
                         )
                     default:
