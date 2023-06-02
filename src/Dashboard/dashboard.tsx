@@ -59,13 +59,13 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                             <>
                             <h1 className="display-1 mb-3 text-center">All Projects View</h1>
                             <div className="container">
-                                <div className="row justify-content-evenly">
+                                <div className="row justify-content-center">
                                 { projects.length ? projects.map( project => {
                                     return (
                                             <div 
                                                 key={project.id} 
                                                 onClick={(e) => handleSelectProject(e, project.id)} 
-                                                className="card rounded shadow m-3 p-5 bg-primary col-10 col-xl-3 pointer justify-content-between"
+                                                className="card rounded shadow m-3 p-5 bg-primary col-10 col-xl-12 pointer justify-content-between"
                                             >
                                                 <h3 className="text-light text-center">{ project.name }</h3>
                                                 <div>
