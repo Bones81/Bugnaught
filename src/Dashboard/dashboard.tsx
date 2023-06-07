@@ -62,11 +62,11 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                             <div 
                                                 key={project.id} 
                                                 onClick={(e) => handleSelectProject(e, project.id)} 
-                                                className="card rounded shadow m-3 p-5 bg-primary col-10 col-xl-12 pointer justify-content-between"
+                                                className="card rounded shadow m-3 p-5 bg-primary col-xl-5 pointer justify-content-between"
                                             >
                                                 <h3 className="text-light text-center">{ project.name }</h3>
+                                                <h5 className="text-dark text-center mb-auto">Bug List</h5>
                                                 <div>
-                                                    <h5 className="text-dark">Bug List</h5>
                                                     <ul className="list-unstyled bugs-ul">
                                                         { project.bugs.length ? project.bugs.map((bug: Bug) => {
                                                             return (

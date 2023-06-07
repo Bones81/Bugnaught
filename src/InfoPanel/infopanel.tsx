@@ -34,13 +34,11 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
     const handleViewUserBugs = (e: any) => {
         e.preventDefault()
         props.setView("user-bugs-view")
-        console.log("Now viewing user bugs for " + user);
     }
 
     const handleGetSingleUserView = (e: any) => {
         e.preventDefault()
         props.setView("single-user-view")
-        console.log("Now viewing single user view for " + user);
     }
 
     const [user, setUser] = useState('')
