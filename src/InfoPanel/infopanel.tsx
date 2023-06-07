@@ -75,7 +75,7 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
-                            <FormLabel></FormLabel>
+                            <FormLabel>Project Title</FormLabel>
                             <FormControl type="text" name="name" value={projectName} onChange={handleProjectNameChange} required></FormControl>
                             <Button variant="primary" className='my-3' type="submit" onClick={(e) => handleAddProject(e)}>
                                 Add Project With These Details

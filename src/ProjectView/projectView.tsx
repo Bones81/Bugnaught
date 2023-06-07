@@ -1,40 +1,52 @@
-import { useState, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react'
 import { Card, Table, Button, Modal, Form, FormLabel, FormControl } from 'react-bootstrap'
 import "./projectView.css"
 import Bug from '../interfaces/bug'
 
 const ProjectView = (props: any) => {
     const [showAddBug, setShowAddBug] = useState(false)
+    const [bugName, setBugName] = useState("")
+    const [description, setDescription] = useState("")
+    const [priority, setPriority] = useState("medium")
 
     const handleCloseAddBug = () => setShowAddBug(false)
     const handleShowAddBug = () => setShowAddBug(true)
 
-    const [bugName, setBugName] = useState("")
-
     const handleAddNewBug = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        // const newBug = {
-        //     id: props.bugs.length + 1,
-        //     name: bugName,
-        //     pid: null,
-        //     priority: null,
-        //     status: "open",
-        //     description: "",
-        //     developer: ""
-        // }
+        const newBug: Bug = {
+            id: props.bugs.length + 1,
+            name: bugName,
+            pid: props.project.id,
+            priority: priority,
+            status: "open",
+            description: description,
+            developer: ""
+        }
+        console.log([...props.bugs, newBug]);
+        
 
-        // props.setBugs([...props.bugs, newBug])
-        // console.log('This should add new bug and its data to bug list');
-        // setBugName("")
-        // setShowAddBug(false)
-        console.log('handleAddNewBug ran')
+        props.setBugs([...props.bugs, newBug])
+        console.log('This should add new bug and its data to bug list');
+        // console.log('handleAddNewBug ran for newBug: ' + JSON.stringify(newBug))
+        setBugName("")
+        setDescription("")
+        setPriority("")
+        setShowAddBug(false)
     }
 
     const handleBugNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         setBugName(e.target.value)
         console.log('handleBugNameChange ran');
-        
+    }
+
+    const handlePriorityChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        setPriority(e.target.value)
+    }
+
+    const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setDescription(e.target.value)
     }
 
     const handleChangeToBugView = (e: React.MouseEvent<HTMLTableRowElement> | React.TouchEvent<HTMLTableRowElement>, bid: Number) => {
@@ -42,6 +54,10 @@ const ProjectView = (props: any) => {
         props.setBugID(bid)
         props.setView("single-bug-view")
     }
+
+    useEffect(() => {
+        localStorage.setItem("BUGNAUGHT_BUGS", JSON.stringify(props.bugs))
+    }, [props.bugs])
 
     return (
         <>
@@ -51,7 +67,7 @@ const ProjectView = (props: any) => {
                 </Card.Header>
                 <Card.Body className='x-overflow-scroll'>
                     <h3 className="text-center fw-bold my-3">Logged Bugs</h3>
-                    <Table className="text-center shadow my-5" hover>
+                    <Table className="text-center shadow my-3" hover>
                         <thead>
                             <tr className='bg-secondary text-light'>
                                 <th>Id</th>
@@ -82,8 +98,8 @@ const ProjectView = (props: any) => {
                 </Card.Body>
                 <Card.Footer>
                     <div className="d-flex justify-content-evenly text-center">
-                        <Button variant="outline" className="disabled" onClick={handleShowAddBug}><span className="line-through">Add New Bug</span></Button>
-                        <Button onClick={props.handleResetProjectsView} variant="primary" size='lg'>Back to All Projects</Button>
+                        <Button variant="warning" className="btn-lg shadow" onClick={handleShowAddBug}><span className="">Add New Bug</span></Button>
+                        <Button onClick={props.handleResetProjectsView} variant="primary" size='lg' className='shadow'>Back to All Projects</Button>
                         </div>
                 </Card.Footer>
             </Card>
@@ -91,12 +107,27 @@ const ProjectView = (props: any) => {
             {/* Add New Bug  */}
             <Modal show={showAddBug} onHide={handleCloseAddBug}>
                 <Modal.Header closeButton>
-                <Modal.Title>Add Project</Modal.Title>
+                <Modal.Title>Add Bug for {props.project.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <FormLabel></FormLabel>
-                        <FormControl type="text" name="name" value={bugName} onChange={handleBugNameChange} required></FormControl>
+                        <Form.Group className="mb-3" controlId='addBugForm.ControlInput1'>
+                            <FormLabel>Bug Title</FormLabel>
+                            <FormControl type="text" size='lg' name="name" value={bugName} onChange={handleBugNameChange} placeholder="Brief bug title: e.g. 'Data not updating properly'" required></FormControl>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="addBugForm.ControlTextArea1">
+                            <Form.Label>Bug Description:</Form.Label>
+                            <Form.Control as="textarea" rows={3} name="description" placeholder="Full bug description goes here." onChange={handleDescriptionChange}/>
+                        </Form.Group>
+                        <Form.Group className='mb-3' controlId='addBugForm.ControlSelect1'>
+                            <Form.Label>Priority:</Form.Label>
+                            <Form.Select size='lg' value="medium" name="priority" onChange={handlePriorityChange}>
+                                <option value="" disabled>--Choose One--</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </Form.Select>
+                        </Form.Group>
                         <Button variant="primary" className='my-3' type="submit" onClick={(e) => handleAddNewBug(e)}>
                             Add Bug With These Details
                         </Button>
