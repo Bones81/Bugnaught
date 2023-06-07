@@ -23,12 +23,8 @@ const ProjectView = (props: any) => {
             description: description,
             developer: ""
         }
-        console.log([...props.bugs, newBug]);
         
-
         props.setBugs([...props.bugs, newBug])
-        console.log('This should add new bug and its data to bug list');
-        // console.log('handleAddNewBug ran for newBug: ' + JSON.stringify(newBug))
         setBugName("")
         setDescription("")
         setPriority("")
@@ -38,7 +34,6 @@ const ProjectView = (props: any) => {
     const handleBugNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         setBugName(e.target.value)
-        console.log('handleBugNameChange ran');
     }
 
     const handlePriorityChange = (e: ChangeEvent<HTMLSelectElement>) => {

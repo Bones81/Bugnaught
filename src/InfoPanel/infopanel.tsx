@@ -63,9 +63,9 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
                     <h3 className="display-5 my-5">Hello, {user}!</h3>
                 }
                 <ul className="d-flex flex-xl-column align-items-center shadow bg-secondary m-3 p-3 border border-1 rounded">
-                    <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 mx-2 px-xl-5 fs-3 text-decoration-none border border-1 border-dark shadow-sm" onClick={handleShowAddProject}>Add Project</li>
-                    <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 mx-2 px-xl-5 fs-3 text-decoration-none border border-1 border-dark shadow-sm" onClick={handleViewUserBugs}>View My Bugs</li>
-                    <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 mx-2 px-xl-5 fs-3 text-decoration-none border border-1 border-dark shadow-sm" onClick={handleGetSingleUserView}>User Info</li>
+                    <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 mx-2 px-xl-3 fs-5 text-decoration-none border border-1 border-dark shadow-sm" onClick={handleShowAddProject}>Add Project</li>
+                    <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 mx-2 px-xl-3 fs-5 text-decoration-none border border-1 border-dark shadow-sm" onClick={handleViewUserBugs}>View My Bugs</li>
+                    <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 mx-2 px-xl-3 fs-5 text-decoration-none border border-1 border-dark shadow-sm" onClick={handleGetSingleUserView}>User Info</li>
                 </ul>
 
                 {/* Add Project  */}
