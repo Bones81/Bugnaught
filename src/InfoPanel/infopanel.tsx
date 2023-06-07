@@ -47,7 +47,7 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
     const users = [
         'Nathan', 'Sujan', 'Jeff', 'Olivia'
     ]
-    const projects = [...props.projects]
+    // const projects = [...props.projects]
 
     useEffect(() => {
         setUser(users[Math.floor(Math.random() * users.length)]) // return random user for fun
