@@ -12,6 +12,7 @@ const App: React.FunctionComponent = () => {
   const [projects, setProjects] = useState<Project[]>([])
 
 
+
   return (
     <>
       <Header setView={setView} />

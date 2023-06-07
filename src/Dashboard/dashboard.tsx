@@ -9,7 +9,6 @@ import ProjectView from "../ProjectView/projectView"
 import BugView from "../BugView/BugView"
 
 const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
-
     const [bugs, setBugs] = useState<Bug[]>([])
     const [bugID, setBugID] = useState<Number | null>(null)
     const [projectID, setProjectID] = useState<Number | null>(null)
@@ -37,8 +36,6 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
         {id: 8, name: 'Old images', pid: 3, status: "open", priority: 'medium', developer: "", description: 'Needs some fresh imagery'},
         {id: 9, name: 'Colors', pid: 3, status: "open", priority: 'low', developer: "", description: 'Too much pastel; Find new, more dramatic color scheme.'}
       ])
-  
-
     }, [])
 
     useEffect(() => {
@@ -106,7 +103,6 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                             </>
                         )
                     case "single-project-view":
-                        // Have to figure out how to pass a single project to this view
                         const project = props.projects.find( (p: Project) => p.id === projectID )
                         
                         return (
@@ -121,7 +117,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                             </>
                         )
                     case "single-bug-view":
-                        const bug = bugs.find( bug => bug.id === bugID )
+                        const bug = bugs.find( (bug: Bug) => bug.id === bugID )
                         const associatedProject = () => {
                             if(bug) {
                                 return props.projects.find( (proj: Project) => proj.id === bug.pid)

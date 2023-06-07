@@ -1,8 +1,41 @@
-import { Card, Table, Button } from 'react-bootstrap'
+import { useState, ChangeEvent, FormEvent } from 'react'
+import { Card, Table, Button, Modal, Form, FormLabel, FormControl } from 'react-bootstrap'
 import "./projectView.css"
 import Bug from '../interfaces/bug'
 
 const ProjectView = (props: any) => {
+    const [showAddBug, setShowAddBug] = useState(false)
+
+    const handleCloseAddBug = () => setShowAddBug(false)
+    const handleShowAddBug = () => setShowAddBug(true)
+
+    const [bugName, setBugName] = useState("")
+
+    const handleAddNewBug = (e: FormEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        // const newBug = {
+        //     id: props.bugs.length + 1,
+        //     name: bugName,
+        //     pid: null,
+        //     priority: null,
+        //     status: "open",
+        //     description: "",
+        //     developer: ""
+        // }
+
+        // props.setBugs([...props.bugs, newBug])
+        // console.log('This should add new bug and its data to bug list');
+        // setBugName("")
+        // setShowAddBug(false)
+        console.log('handleAddNewBug ran')
+    }
+
+    const handleBugNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        setBugName(e.target.value)
+        console.log('handleBugNameChange ran');
+        
+    }
 
     const handleChangeToBugView = (e: React.MouseEvent<HTMLTableRowElement> | React.TouchEvent<HTMLTableRowElement>, bid: Number) => {
         e.preventDefault()
@@ -11,48 +44,71 @@ const ProjectView = (props: any) => {
     }
 
     return (
-        <Card className='shadow container-fluid'>
-            <Card.Header>
-                <Card.Title className='display-4 fw-bold text-center'>{props.project.name}</Card.Title>
-            </Card.Header>
-            <Card.Body className='x-overflow-scroll'>
-                <h3 className="text-center fw-bold my-3">Logged Bugs</h3>
-                <Table className="text-center shadow my-5" hover>
-                    <thead>
-                        <tr className='bg-secondary text-light'>
-                            <th>Id</th>
-                            <th className='text-start'>Bug Title</th>
-                            <th>Status</th>
-                            <th>Priority</th>
-                            <th>Assigned To</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {props.project.bugs.length ? props.project.bugs.map( (bug: Bug) => {
-                        return (
-                        <tr key={bug.id} onClick={ (e) => handleChangeToBugView(e, bug.id) } className={`pointer ${bug.status === "closed" ? "text-muted line-through" : "text-dark"}`}>
-                            <td>{bug.id}</td>
-                            <td className='text-start'>{bug.name}</td>
-                            <td>{bug.status.toUpperCase()}</td>
-                            <td>{bug.priority}</td>
-                            <td>{bug.developer || "None assigned" }</td>
-                            <td>{bug.description}</td>
-                        </tr>                                            
-                    )})
-                    :
-                    <tr className="text-center"><td colSpan={4}>No Bugs Logged Yet For This Project</td></tr>
-                    }
-                    </tbody>
-                </Table>
-            </Card.Body>
-            <Card.Footer>
-                <div className="d-flex justify-content-evenly text-center">
-                    <Button variant="outline" className="disabled"><span className="line-through">Add New Bug</span></Button>
-                    <Button onClick={props.handleResetProjectsView} variant="primary" size='lg'>Back to All Projects</Button>
-                    </div>
-            </Card.Footer>
-        </Card>
+        <>
+            <Card className='shadow container-fluid'>
+                <Card.Header>
+                    <Card.Title className='display-4 fw-bold text-center'>{props.project.name}</Card.Title>
+                </Card.Header>
+                <Card.Body className='x-overflow-scroll'>
+                    <h3 className="text-center fw-bold my-3">Logged Bugs</h3>
+                    <Table className="text-center shadow my-5" hover>
+                        <thead>
+                            <tr className='bg-secondary text-light'>
+                                <th>Id</th>
+                                <th className='text-start'>Bug Title</th>
+                                <th>Status</th>
+                                <th>Priority</th>
+                                <th>Assigned To</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {props.project.bugs.length ? props.project.bugs.map( (bug: Bug) => {
+                            return (
+                            <tr key={bug.id} onClick={ (e) => handleChangeToBugView(e, bug.id) } className={`pointer ${bug.status === "closed" ? "text-muted line-through" : "text-dark"}`}>
+                                <td>{bug.id}</td>
+                                <td className='text-start'>{bug.name}</td>
+                                <td>{bug.status.toUpperCase()}</td>
+                                <td>{bug.priority}</td>
+                                <td>{bug.developer || "None assigned" }</td>
+                                <td>{bug.description}</td>
+                            </tr>                                            
+                        )})
+                        :
+                        <tr className="text-center"><td colSpan={4}>No Bugs Logged Yet For This Project</td></tr>
+                        }
+                        </tbody>
+                    </Table>
+                </Card.Body>
+                <Card.Footer>
+                    <div className="d-flex justify-content-evenly text-center">
+                        <Button variant="outline" className="disabled" onClick={handleShowAddBug}><span className="line-through">Add New Bug</span></Button>
+                        <Button onClick={props.handleResetProjectsView} variant="primary" size='lg'>Back to All Projects</Button>
+                        </div>
+                </Card.Footer>
+            </Card>
+
+            {/* Add New Bug  */}
+            <Modal show={showAddBug} onHide={handleCloseAddBug}>
+                <Modal.Header closeButton>
+                <Modal.Title>Add Project</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <FormLabel></FormLabel>
+                        <FormControl type="text" name="name" value={bugName} onChange={handleBugNameChange} required></FormControl>
+                        <Button variant="primary" className='my-3' type="submit" onClick={(e) => handleAddNewBug(e)}>
+                            Add Bug With These Details
+                        </Button>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseAddBug}>
+                    Close
+                </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     )
 }
 
