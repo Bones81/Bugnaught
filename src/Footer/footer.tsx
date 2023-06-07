@@ -1,7 +1,7 @@
 const Footer: React.FunctionComponent = () => {
     return (
         <>
-            <footer className="container-fluid mt-auto bg-secondary">
+            <footer className="container-fluid mt-auto bg-secondary sticky-bottom">
                 <div className="row align-items-center justify-content-between mx-5">
                     <div className="col-3 col-lg-4 p-3">
                         <h3>Bugnaught</h3>
