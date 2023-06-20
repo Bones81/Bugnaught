@@ -6,7 +6,7 @@ import CommentType from '../interfaces/CommentType.ts'
 import Comment from '../Comment/comment.tsx'
 import Project from '../interfaces/Project.ts'
 
-const BugView: React.FunctionComponent<BugViewProps> = ({ bug, project, projects, setView }: BugViewProps) => {
+const BugView: React.FunctionComponent<BugViewProps> = ({ bug, handleBugStatusUpdate, project, projects, setView }: BugViewProps) => {
     
     const mockComments: CommentType[] = [
         {id: 1, author: "Nathan", createdAt: new Date('June 17, 2019 13:24:00').toLocaleString(), bid: 1, pid: 1, content: "Needs dev assignment. Anyone want to take this one?"},
@@ -34,7 +34,6 @@ const BugView: React.FunctionComponent<BugViewProps> = ({ bug, project, projects
     // This two lines should set the initial comments array from localStorage, if it already exists; otherwise it will initialize comments with an empty array
     const initialComments: CommentType[] = localStorage.getItem("BUGNAUGHT_COMMENTS") && JSON.parse(localStorage.getItem("BUGNAUGHT_COMMENTS") || "[]") || mockComments
     const [comments, setComments] = useState<CommentType[]>(initialComments)
-
     const [commentText, setCommentText] = useState<string>('')
 
     const handleCommentTextChange = (e: any) => {
@@ -94,7 +93,16 @@ const BugView: React.FunctionComponent<BugViewProps> = ({ bug, project, projects
                     bug.status === "assigned" ? "bg-warning" : 
                     bug.status === "in-progress" ? "bg-teal" : 
                     "bg-success"}`}
-                >STATUS: {bug.status.toUpperCase()} {bug.status === "closed" ? "🏁" : null}</Card.Text>
+                >
+                    STATUS: {bug.status.toUpperCase()} {bug.status === "closed" ?? "🏁"}
+                    <select className='fs-5' id='status-select' name="status" defaultValue="" onChange={(e) => handleBugStatusUpdate(e, bug.id)}>
+                        <option value="" disabled>--Change Status--</option>
+                        <option value="open" >Open</option>
+                        <option value="assigned" >Assigned</option>
+                        <option value="in-progress" >In Progress</option>
+                        <option value="closed" >Closed</option>
+                    </select>
+                </Card.Text>
                 <h4 className="mt-2 p-2 text-center">Assigned to: {bug.developer}</h4>
                 <Card.Text className='fs-3 border border-3 px-5 py-3 my-3 shadow'><span className="text-primary fw-bold">Bug Description:</span> {bug.description}</Card.Text>
                 <Card.Text className="text-muted text-center my-3">(Attachment: Screenshot or Other Attachment Would Go Here)</Card.Text>

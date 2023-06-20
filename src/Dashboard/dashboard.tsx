@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, ChangeEvent } from "react"
 import "./dashboard.css"
 
 import Bug from "../interfaces/Bug"
@@ -26,6 +26,23 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
     const [bugs, setBugs] = useState<Bug[]>(initialBugs)
     const [bugID, setBugID] = useState<Number | null>(null)
     const [projectID, setProjectID] = useState<Number | null>(null)
+
+    const handleBugStatusUpdate = (e: ChangeEvent<HTMLSelectElement>, id: Number) => {
+        e.preventDefault()
+        const thisBug = bugs.find( (bug: Bug) => bug.id === id)
+        // find bug inside bugs, update its contents, replace it in bugs, will be easier with database
+        if(thisBug) { 
+            thisBug.status = e.target.value
+            const newBugs: Bug[] = [...bugs].map( (bug: Bug) => {
+                if (bug.id === id) return thisBug
+                else return bug
+            })
+            localStorage.setItem("BUGNAUGHT_BUGS", JSON.stringify(newBugs))
+            setBugs(newBugs)
+        }
+
+
+    }
 
     const handleSelectProject = (e: React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>, pid: Number) => {
         e.preventDefault()
@@ -130,7 +147,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         return (
                             <>
                                 <h1 className="display-1 mb-3 text-center">Bug View</h1>
-                                { bug ? <BugView bug={bug} projects={props.projects} project={associatedProject()} setView={props.setView} /> : <h1>Error: No Bug Data Found</h1> } 
+                                { bug ? <BugView bug={bug} handleBugStatusUpdate={handleBugStatusUpdate} projects={props.projects} project={associatedProject()} setView={props.setView} /> : <h1>Error: No Bug Data Found</h1> } 
                             </>
                         )
                     case "user-bugs-view":
