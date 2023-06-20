@@ -37,8 +37,8 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                 if (bug.id === id) return thisBug
                 else return bug
             })
-            localStorage.setItem("BUGNAUGHT_BUGS", JSON.stringify(newBugs))
-            setBugs(newBugs)
+            localStorage.setItem("BUGNAUGHT_BUGS", JSON.stringify(newBugs)) // this simulates writing to the database
+            setBugs(newBugs) // this essentially simulates resetting the state to match the now updated simulated database
         }
 
 

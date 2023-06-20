@@ -62,7 +62,7 @@ const ProjectView: React.FunctionComponent<ProjectViewProps> = ({ bugs, handleRe
                     <Card.Title className='display-4 fw-bold text-center'>{project.name}</Card.Title>
                 </Card.Header>
                 <Card.Body className='x-overflow-scroll'>
-                    <h3 className="text-center fw-bold my-3">Logged Bugs</h3>
+                    <h3 className="text-center fw-bold my-3">Logged Bugs (click row for full details)</h3>
                     <Table className="text-center shadow my-3" hover>
                         <thead>
                             <tr className='bg-secondary text-light'>
@@ -71,6 +71,7 @@ const ProjectView: React.FunctionComponent<ProjectViewProps> = ({ bugs, handleRe
                                 <th>Status</th>
                                 <th>Priority</th>
                                 <th>Assigned To</th>
+                                <th># Comments</th>
                                 <th>Description</th>
                             </tr>
                         </thead>
@@ -83,6 +84,7 @@ const ProjectView: React.FunctionComponent<ProjectViewProps> = ({ bugs, handleRe
                                 <td>{bug.status.toUpperCase()}</td>
                                 <td>{bug.priority}</td>
                                 <td>{bug.developer || "None assigned" }</td>
+                                <td>TBD</td>
                                 <td>{bug.description}</td>
                             </tr>                                            
                         )})
