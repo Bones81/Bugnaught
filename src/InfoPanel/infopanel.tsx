@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { Modal, Button, Form, FormControl, FormLabel } from 'react-bootstrap'
 import './infopanel.css'
-import InfoPanelProps from '../interfaces/infopanelprops'
+import InfoPanelProps from '../interfaces/InfoPanelProps'
 
 const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
     const [showAddProject, setShowAddProject] = useState(false)

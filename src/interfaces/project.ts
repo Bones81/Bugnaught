@@ -1,4 +1,4 @@
-import Bug from "./bug"
+import Bug from "./Bug"
 
 interface Project {
     id: number,

@@ -1,9 +1,10 @@
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react'
 import { Card, Table, Button, Modal, Form, FormLabel, FormControl } from 'react-bootstrap'
 import "./projectView.css"
-import Bug from '../interfaces/bug'
+import Bug from '../interfaces/Bug'
+import ProjectViewProps from '../interfaces/ProjectViewProps'
 
-const ProjectView = (props: any) => {
+const ProjectView = (props: ProjectViewProps) => {
     const [showAddBug, setShowAddBug] = useState(false)
     const [bugName, setBugName] = useState("")
     const [description, setDescription] = useState("")

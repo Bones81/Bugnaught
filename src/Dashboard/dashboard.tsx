@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import "./dashboard.css"
 
-import Bug from "../interfaces/bug"
-import Project from "../interfaces/project"
-import DashboardProps from '../interfaces/dashboardprops'
+import Bug from "../interfaces/Bug"
+import Project from "../interfaces/Project"
+import DashboardProps from "../interfaces/DashboardProps"
 
 import ProjectView from "../ProjectView/projectView"
 import BugView from "../BugView/BugView"

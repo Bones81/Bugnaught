@@ -2,7 +2,7 @@ import './header.css'
 import { useState } from 'react';
 import { Navbar, Nav, Container, Button, Modal, ModalHeader, ModalFooter, ModalTitle, ModalBody, ModalDialog, Form, FormGroup, FormLabel, FormControl, FormText } from 'react-bootstrap'
 
-import HeaderProps from '../interfaces/headerprops';
+import HeaderProps from '../interfaces/HeaderProps';
 
 const Header: React.FunctionComponent<HeaderProps> = (props: any) => {
     const [showModal, setShowModal] = useState(false);

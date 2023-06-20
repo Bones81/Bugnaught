@@ -4,7 +4,7 @@ import Header from './Header/header'
 import InfoPanel from './InfoPanel/infopanel'
 import Dashboard from './Dashboard/dashboard'
 import Footer from './Footer/footer'
-import Project from './interfaces/project'
+import Project from './interfaces/Project'
 
 const App: React.FunctionComponent = () => {
   const [view, setView] = useState("projects-view");

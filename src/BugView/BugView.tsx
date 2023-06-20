@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Card, Button, Row, Col, Form, FormControl } from 'react-bootstrap'
 import "./BugView.css"
-import Project from '../interfaces/project.ts'
-import CommentType from '../interfaces/comment.ts'
+import Project from '../interfaces/Project.ts'
+import CommentType from '../interfaces/Comment.ts'
 import Comment from '../Comment/comment.tsx'
 
 const BugView = (props: any) => {
