@@ -4,7 +4,7 @@ import "./projectView.css"
 import Bug from '../interfaces/Bug'
 import ProjectViewProps from '../interfaces/ProjectViewProps'
 
-const ProjectView = (props: ProjectViewProps) => {
+const ProjectView: React.FunctionComponent<ProjectViewProps> = ({ bugs, handleResetProjectsView, project, setBugID, setBugs, setView }: ProjectViewProps) => {
     const [showAddBug, setShowAddBug] = useState(false)
     const [bugName, setBugName] = useState("")
     const [description, setDescription] = useState("")
@@ -16,16 +16,16 @@ const ProjectView = (props: ProjectViewProps) => {
     const handleAddNewBug = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
         const newBug: Bug = {
-            id: props.bugs.length + 1,
+            id: bugs.length + 1,
             name: bugName,
-            pid: props.project.id,
+            pid: project.id,
             priority: priority,
             status: "open",
             description: description,
             developer: ""
         }
         
-        props.setBugs([...props.bugs, newBug])
+        setBugs([...bugs, newBug])
         setBugName("")
         setDescription("")
         setPriority("")
@@ -47,19 +47,19 @@ const ProjectView = (props: ProjectViewProps) => {
 
     const handleChangeToBugView = (e: React.MouseEvent<HTMLTableRowElement> | React.TouchEvent<HTMLTableRowElement>, bid: Number) => {
         e.preventDefault()
-        props.setBugID(bid)
-        props.setView("single-bug-view")
+        setBugID(bid)
+        setView("single-bug-view")
     }
 
     useEffect(() => {
-        localStorage.setItem("BUGNAUGHT_BUGS", JSON.stringify(props.bugs))
-    }, [props.bugs])
+        localStorage.setItem("BUGNAUGHT_BUGS", JSON.stringify(bugs))
+    }, [bugs])
 
     return (
         <>
             <Card className='shadow container-fluid'>
                 <Card.Header>
-                    <Card.Title className='display-4 fw-bold text-center'>{props.project.name}</Card.Title>
+                    <Card.Title className='display-4 fw-bold text-center'>{project.name}</Card.Title>
                 </Card.Header>
                 <Card.Body className='x-overflow-scroll'>
                     <h3 className="text-center fw-bold my-3">Logged Bugs</h3>
@@ -75,7 +75,7 @@ const ProjectView = (props: ProjectViewProps) => {
                             </tr>
                         </thead>
                         <tbody>
-                        {props.project.bugs.length ? props.project.bugs.map( (bug: Bug) => {
+                        {project.bugs.length ? project.bugs.map( (bug: Bug) => {
                             return (
                             <tr key={bug.id} onClick={ (e) => handleChangeToBugView(e, bug.id) } className={`pointer ${bug.status === "closed" ? "text-muted line-through" : "text-dark"}`}>
                                 <td>{bug.id}</td>
@@ -95,7 +95,7 @@ const ProjectView = (props: ProjectViewProps) => {
                 <Card.Footer>
                     <div className="d-flex justify-content-evenly text-center">
                         <Button variant="warning" className="btn-lg shadow" onClick={handleShowAddBug}><span className="">Add New Bug</span></Button>
-                        <Button onClick={props.handleResetProjectsView} variant="primary" size='lg' className='shadow'>Back to All Projects</Button>
+                        <Button onClick={handleResetProjectsView} variant="primary" size='lg' className='shadow'>Back to All Projects</Button>
                         </div>
                 </Card.Footer>
             </Card>
@@ -103,7 +103,7 @@ const ProjectView = (props: ProjectViewProps) => {
             {/* Add New Bug  */}
             <Modal show={showAddBug} onHide={handleCloseAddBug}>
                 <Modal.Header closeButton>
-                <Modal.Title>Add Bug for {props.project.name}</Modal.Title>
+                <Modal.Title>Add Bug for {project.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>

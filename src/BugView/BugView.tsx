@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Card, Button, Row, Col, Form, FormControl } from 'react-bootstrap'
 import "./BugView.css"
-import Project from '../interfaces/Project.ts'
-import CommentType from '../interfaces/Comment.ts'
+import BugViewProps from '../interfaces/BugViewProps.ts'
+import CommentType from '../interfaces/CommentType.ts'
 import Comment from '../Comment/comment.tsx'
+import Project from '../interfaces/Project.ts'
 
-const BugView = (props: any) => {
+const BugView: React.FunctionComponent<BugViewProps> = ({ bug, project, projects, setView }: BugViewProps) => {
     
     const mockComments: CommentType[] = [
         {id: 1, author: "Nathan", createdAt: new Date('June 17, 2019 13:24:00').toLocaleString(), bid: 1, pid: 1, content: "Needs dev assignment. Anyone want to take this one?"},
@@ -42,7 +43,7 @@ const BugView = (props: any) => {
 
     const handleReturnToProjectView = (e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        props.setView("single-project-view")
+        setView("single-project-view")
     }
 
     const handleAddComment = (e: any) => {
@@ -57,8 +58,8 @@ const BugView = (props: any) => {
             id: comments.length + 1,
             author: "Logged in user name would go here",
             createdAt: new Date().toLocaleString(),
-            bid: props.bug.id,
-            pid: props.project.id,
+            bid: bug.id,
+            pid: project.id,
             content: commentText
         }
 
@@ -75,34 +76,34 @@ const BugView = (props: any) => {
     return (
         <Card className='shadow'>
             <Card.Header className='bg-secondary text-light'>
-                <Card.Title className='display-3 text-center fw-bold'>{props.project.name}</Card.Title>
+                <Card.Title className='display-3 text-center fw-bold'>{project.name}</Card.Title>
             </Card.Header>
             <Card.Header className='bg-secondary text-light'>
-                <Card.Subtitle className='display-5 fw-bolder text-center'>Bug Title: <span className={props.bug.status === "closed" ? "line-through" : ""}>{props.bug.name}</span></Card.Subtitle>
+                <Card.Subtitle className='display-5 fw-bolder text-center'>Bug Title: <span className={bug.status === "closed" ? "line-through" : ""}>{bug.name}</span></Card.Subtitle>
             </Card.Header>
             <Card.Body>
                 <div className="container bg-info rounded-pill mb-3 shadow">
                     <Row className="justify-content-center align-items-center">
-                        <Col className='p-3 text-center'><Card.Subtitle className='fs-4'>BugID: {props.bug.id}</Card.Subtitle></Col>
-                        {/* <Col className='p-3 text-center'><Card.Subtitle className='fs-4'>ProjectID: {props.bug.pid}</Card.Subtitle></Col> */}
-                        <Col className='p-3 text-center'><Card.Subtitle className={`fs-4 rounded-pill p-2 ${props.bug.priority === 'high' ? "bg-danger" : props.bug.priority === 'medium' ? "bg-warning" : "bg-teal"}`}>Priority: {props.bug.priority}</Card.Subtitle></Col>
+                        <Col className='p-3 text-center'><Card.Subtitle className='fs-4'>BugID: {bug.id}</Card.Subtitle></Col>
+                        {/* <Col className='p-3 text-center'><Card.Subtitle className='fs-4'>ProjectID: {bug.pid}</Card.Subtitle></Col> */}
+                        <Col className='p-3 text-center'><Card.Subtitle className={`fs-4 rounded-pill p-2 ${bug.priority === 'high' ? "bg-danger" : bug.priority === 'medium' ? "bg-warning" : "bg-teal"}`}>Priority: {bug.priority}</Card.Subtitle></Col>
                     </Row>
                 </div>
                 <Card.Text className={`fs-1 p-3 text-center ${
-                    props.bug.status === "open" ? "bg-primary" : 
-                    props.bug.status === "assigned" ? "bg-warning" : 
-                    props.bug.status === "in-progress" ? "bg-teal" : 
+                    bug.status === "open" ? "bg-primary" : 
+                    bug.status === "assigned" ? "bg-warning" : 
+                    bug.status === "in-progress" ? "bg-teal" : 
                     "bg-success"}`}
-                >STATUS: {props.bug.status.toUpperCase()} {props.bug.status === "closed" ? "🏁" : null}</Card.Text>
-                <h4 className="mt-2 p-2 text-center">Assigned to: {props.bug.developer}</h4>
-                <Card.Text className='fs-3 border border-3 px-5 py-3 my-3 shadow'><span className="text-primary fw-bold">Bug Description:</span> {props.bug.description}</Card.Text>
+                >STATUS: {bug.status.toUpperCase()} {bug.status === "closed" ? "🏁" : null}</Card.Text>
+                <h4 className="mt-2 p-2 text-center">Assigned to: {bug.developer}</h4>
+                <Card.Text className='fs-3 border border-3 px-5 py-3 my-3 shadow'><span className="text-primary fw-bold">Bug Description:</span> {bug.description}</Card.Text>
                 <Card.Text className="text-muted text-center my-3">(Attachment: Screenshot or Other Attachment Would Go Here)</Card.Text>
 
                 <div className="container-fluid my-3 p-3 border border-info rounded shadow-lg">
                     <h3 className="text-center fw-3">Comments</h3>
                     <ul className="comments-ul list-unstyled">
                         { comments.length ? comments.map( (comment: CommentType) => {
-                            return comment.bid === props.bug.id && (
+                            return comment.bid === bug.id && (
                             <div key={comment.id}>
                                 <hr/>
                                 <Comment comment={comment}/>
@@ -121,7 +122,13 @@ const BugView = (props: any) => {
             </Card.Body>
             <Card.Footer className='py-4'>
                 <div className="d-flex justify-content-evenly text-center">
-                    <Button onClick={handleReturnToProjectView} variant="primary" size='lg'>Back to Project: { props.projects.find( (p:Project) => props.bug.pid === p.id).name }</Button>
+                    <Button 
+                        onClick={handleReturnToProjectView} 
+                        variant="primary" size='lg'
+                    >
+                        {/* Note the null-ish coalescer ( i.e. '?' )at the end of this next line to ensure no undefined values pass through */}
+                        Back to Project: { projects.find( ( p: Project ) => bug.pid === p.id)?.name }
+                    </Button>
                     </div>
             </Card.Footer>
         </Card>

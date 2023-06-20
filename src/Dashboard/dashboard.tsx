@@ -2,14 +2,13 @@ import { useState, useEffect } from "react"
 import "./dashboard.css"
 
 import Bug from "../interfaces/Bug"
-import Project from "../interfaces/Project"
-import DashboardProps from "../interfaces/DashboardProps"
-
-import ProjectView from "../ProjectView/projectView"
 import BugView from "../BugView/BugView"
+import DashboardProps from "../interfaces/DashboardProps"
+import Project from "../interfaces/Project"
+import ProjectView from "../ProjectView/ProjectView"
 
 const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
-    const mockBugs = [
+    const mockBugs: Bug[] = [
         {id: 1, name: 'Data issue', pid: 1, status: "open", priority: 'high', developer: "Nathan", description: 'No real data yet!'},
         {id: 2, name: 'Can\'t add comments', pid: 1, status: "open", priority: 'medium', developer: "Nathan", description: 'Cannot add comments to bug yet!'},
         {id: 3, name: 'Needs Bootstrap', pid: 1, status: "closed", priority: 'low', developer: "Sujan", description: 'Bootstrap not integrated!'},
@@ -119,7 +118,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                                 />
                             </>
                         )
-                    case "single-bug-view":
+                    case "single-bug-view":                        
                         const bug = bugs.find( (bug: Bug) => bug.id === bugID )
                         const associatedProject = () => {
                             if(bug) {
@@ -131,7 +130,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = (props: any) => {
                         return (
                             <>
                                 <h1 className="display-1 mb-3 text-center">Bug View</h1>
-                                <BugView bug={bug} projects={props.projects} project={associatedProject()} setView={props.setView} />
+                                { bug ? <BugView bug={bug} projects={props.projects} project={associatedProject()} setView={props.setView} /> : <h1>Error: No Bug Data Found</h1> } 
                             </>
                         )
                     case "user-bugs-view":
