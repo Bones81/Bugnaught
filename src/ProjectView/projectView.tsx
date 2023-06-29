@@ -86,8 +86,8 @@ const ProjectView: React.FunctionComponent<ProjectViewProps> = ({ bugs, handleRe
                                 <td className='text-start'>{bug.name}</td>
                                 <td>{bug.status.toUpperCase()}</td>
                                 <td>{bug.priority}</td>
-                                <td>{bug.developer ? bug.developer.first_name + " " + bug.developer.last_name : "None assigned" }</td>
-                                <td>TBD</td>
+                                <td>{bug.developer ? bug.developer.first_name + " " + bug.developer.last_name : "None" }</td>
+                                <td>{bug.comments && bug.comments.length || 0}</td>
                                 <td>{bug.description}</td>
                             </tr>                                            
                         )})

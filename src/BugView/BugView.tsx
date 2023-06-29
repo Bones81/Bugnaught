@@ -110,7 +110,7 @@ const BugView: React.FunctionComponent<BugViewProps> = ({ bug, comments, handleB
                         <option value="closed" >Closed</option>
                     </select>
                 </Card.Text>
-                <h4 className="mt-2 p-2 text-center">Assigned to: {bug.developer?.first_name + " " + bug.developer?.last_name}</h4>
+                <h4 className="mt-2 p-2 text-center">Assigned to: {bug.developer ? bug.developer.first_name + " " + bug.developer.last_name : 'None'}</h4>
                 <Card.Text className='fs-3 border border-3 px-5 py-3 my-3 shadow'><span className="text-primary fw-bold">Bug Description:</span> {bug.description}</Card.Text>
                 <Card.Text className="text-muted text-center my-3">(Attachment: Screenshot or Other Attachment Would Go Here)</Card.Text>
 
