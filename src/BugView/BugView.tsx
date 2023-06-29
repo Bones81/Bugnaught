@@ -6,34 +6,34 @@ import CommentType from '../interfaces/CommentType.ts'
 import Comment from '../Comment/comment.tsx'
 import Project from '../interfaces/Project.ts'
 
-const BugView: React.FunctionComponent<BugViewProps> = ({ bug, handleBugStatusUpdate, project, projects, setView }: BugViewProps) => {
+const BugView: React.FunctionComponent<BugViewProps> = ({ bug, comments, handleBugStatusUpdate, project, projects, setComments, setView }: BugViewProps) => {
     
-    const mockComments: CommentType[] = [
-        {id: 1, author: "Nathan", createdAt: new Date('June 17, 2019 13:24:00').toLocaleString(), bid: 1, pid: 1, content: "Needs dev assignment. Anyone want to take this one?"},
-        {id: 2, author: "Sujan", createdAt: new Date('June 17, 2019 15:24:00').toLocaleString(), bid: 1, pid: 1, content: "I can take it"},
-        {id: 3, author: "Jeff", createdAt: new Date('June 17, 2019 16:24:00').toLocaleString(), bid: 2, pid: 1, content: "Needs dev assignment. Anyone want to take this one?"},
-        {id: 4, author: "Olivia", createdAt: new Date('June 17, 2019 16:44:00').toLocaleString(), bid: 2, pid: 1, content: "You sweet man. I can take it"},
-        {id: 5, author: "Jeff", createdAt: new Date('June 20, 2019 13:24:00').toLocaleString(), bid: 3, pid: 1, content: "Hi everyone! Sorry to bother you all. But I need to assign a dev to this. Who wants it?"},
-        {id: 6, author: "Sujan", createdAt: new Date('June 27, 2019 10:24:00').toLocaleString(), bid: 3, pid: 1, content: "By the Hammer of Thor, I shall take up this burden!"},
-        {id: 7, author: "Nathan", createdAt: new Date('July 23, 2019 13:24:00').toLocaleString(), bid: 4, pid: 2, content: "Needs dev assignment. Anyone want to take this one? Or shall I just take it."},
-        {id: 8, author: "Sujan", createdAt: new Date('July 29, 2019 23:24:00').toLocaleString(), bid: 4, pid: 2, content: "No worries, Edward. I'm on it."},
-        {id: 9, author: "Nathan", createdAt: new Date('June 17, 2020 10:24:00').toLocaleString(), bid: 5, pid: 2, content: "Bad news, nobody. We have another bug in the system. I'll have to alert the Sunset Squad robots to its imminent demise."},
-        {id: 10, author: "Sujan", createdAt: new Date('June 17, 2020 13:24:00').toLocaleString(), bid: 5, pid: 2, content: "I'm 40% Sunset Squad robot!"},
-        {id: 11, author: "Nathan", createdAt: new Date('June 30, 2020 09:24:00').toLocaleString(), bid: 6, pid: 2, content: "Why do I seem to have all the bugs to assign? Here's another. Who wants it?"},
-        {id: 12, author: "Sujan", createdAt: new Date('July 17, 2020 06:24:00').toLocaleString(), bid: 6, pid: 2, content: "Edward of the North, I, Edward of the West, shall take it."},
-        {id: 13, author: "Nathan", createdAt: new Date('July 20, 2020 14:44:00').toLocaleString(), bid: 7, pid: 3, content: "Once more unto the breach!"},
-        {id: 14, author: "Sujan", createdAt: new Date('August 15, 2020 14:44:00').toLocaleString(), bid: 7, pid: 3, content: "Edward of Asia, I, Edward of the Americas, shall take it!"},
-        {id: 15, author: "Nathan", createdAt: new Date('August 17, 2020 23:14:00').toLocaleString(), bid: 8, pid: 3, content: "Medium importance, but could easily be considered high priority. Anyone free to handle it?"},
-        {id: 16, author: "Jeff", createdAt: new Date('January 7, 2021 10:04:00').toLocaleString(), bid: 8, pid: 3, content: "I'm at the bodega getting a soft pretzel right now, but I'll get on it as soon as I get back from walking the dogs."},
-        {id: 17, author: "Olivia", createdAt: new Date('January 18, 2021 18:52:21').toLocaleString(), bid: 9, pid: 3, content: "Not super important, but I could use one of you to handle this bug."},
-        {id: 18, author: "Nathan", createdAt: new Date('April 5, 2021 22:34:12').toLocaleString(), bid: 9, pid: 3, content: "I suppose I have a few extra days to work on this."},
-        {id: 19, author: "Sujan", createdAt: new Date('April 5, 2022 22:34:12').toLocaleString(), bid: 3, pid: 1, content: "Should be fixed now."},
-    ]
+    // const mockComments: CommentType[] = [
+    //     {id: 1, author: "Nathan", createdAt: new Date('June 17, 2019 13:24:00').toLocaleString(), bid: 1, pid: 1, content: "Needs dev assignment. Anyone want to take this one?"},
+    //     {id: 2, author: "Sujan", createdAt: new Date('June 17, 2019 15:24:00').toLocaleString(), bid: 1, pid: 1, content: "I can take it"},
+    //     {id: 3, author: "Jeff", createdAt: new Date('June 17, 2019 16:24:00').toLocaleString(), bid: 2, pid: 1, content: "Needs dev assignment. Anyone want to take this one?"},
+    //     {id: 4, author: "Olivia", createdAt: new Date('June 17, 2019 16:44:00').toLocaleString(), bid: 2, pid: 1, content: "You sweet man. I can take it"},
+    //     {id: 5, author: "Jeff", createdAt: new Date('June 20, 2019 13:24:00').toLocaleString(), bid: 3, pid: 1, content: "Hi everyone! Sorry to bother you all. But I need to assign a dev to this. Who wants it?"},
+    //     {id: 6, author: "Sujan", createdAt: new Date('June 27, 2019 10:24:00').toLocaleString(), bid: 3, pid: 1, content: "By the Hammer of Thor, I shall take up this burden!"},
+    //     {id: 7, author: "Nathan", createdAt: new Date('July 23, 2019 13:24:00').toLocaleString(), bid: 4, pid: 2, content: "Needs dev assignment. Anyone want to take this one? Or shall I just take it."},
+    //     {id: 8, author: "Sujan", createdAt: new Date('July 29, 2019 23:24:00').toLocaleString(), bid: 4, pid: 2, content: "No worries, Edward. I'm on it."},
+    //     {id: 9, author: "Nathan", createdAt: new Date('June 17, 2020 10:24:00').toLocaleString(), bid: 5, pid: 2, content: "Bad news, nobody. We have another bug in the system. I'll have to alert the Sunset Squad robots to its imminent demise."},
+    //     {id: 10, author: "Sujan", createdAt: new Date('June 17, 2020 13:24:00').toLocaleString(), bid: 5, pid: 2, content: "I'm 40% Sunset Squad robot!"},
+    //     {id: 11, author: "Nathan", createdAt: new Date('June 30, 2020 09:24:00').toLocaleString(), bid: 6, pid: 2, content: "Why do I seem to have all the bugs to assign? Here's another. Who wants it?"},
+    //     {id: 12, author: "Sujan", createdAt: new Date('July 17, 2020 06:24:00').toLocaleString(), bid: 6, pid: 2, content: "Edward of the North, I, Edward of the West, shall take it."},
+    //     {id: 13, author: "Nathan", createdAt: new Date('July 20, 2020 14:44:00').toLocaleString(), bid: 7, pid: 3, content: "Once more unto the breach!"},
+    //     {id: 14, author: "Sujan", createdAt: new Date('August 15, 2020 14:44:00').toLocaleString(), bid: 7, pid: 3, content: "Edward of Asia, I, Edward of the Americas, shall take it!"},
+    //     {id: 15, author: "Nathan", createdAt: new Date('August 17, 2020 23:14:00').toLocaleString(), bid: 8, pid: 3, content: "Medium importance, but could easily be considered high priority. Anyone free to handle it?"},
+    //     {id: 16, author: "Jeff", createdAt: new Date('January 7, 2021 10:04:00').toLocaleString(), bid: 8, pid: 3, content: "I'm at the bodega getting a soft pretzel right now, but I'll get on it as soon as I get back from walking the dogs."},
+    //     {id: 17, author: "Olivia", createdAt: new Date('January 18, 2021 18:52:21').toLocaleString(), bid: 9, pid: 3, content: "Not super important, but I could use one of you to handle this bug."},
+    //     {id: 18, author: "Nathan", createdAt: new Date('April 5, 2021 22:34:12').toLocaleString(), bid: 9, pid: 3, content: "I suppose I have a few extra days to work on this."},
+    //     {id: 19, author: "Sujan", createdAt: new Date('April 5, 2022 22:34:12').toLocaleString(), bid: 3, pid: 1, content: "Should be fixed now."},
+    // ]
 
     // localStorage.removeItem("BUGNAUGHT_COMMENTS") // development use only when resetting of comments is needed
     // This two lines should set the initial comments array from localStorage, if it already exists; otherwise it will initialize comments with an empty array
-    const initialComments: CommentType[] = localStorage.getItem("BUGNAUGHT_COMMENTS") && JSON.parse(localStorage.getItem("BUGNAUGHT_COMMENTS") || "[]") || mockComments
-    const [comments, setComments] = useState<CommentType[]>(initialComments)
+    // const initialComments: CommentType[] = localStorage.getItem("BUGNAUGHT_COMMENTS") && JSON.parse(localStorage.getItem("BUGNAUGHT_COMMENTS") || "[]") || mockComments
+
     const [commentText, setCommentText] = useState<string>('')
 
     const handleCommentTextChange = (e: any) => {
@@ -56,7 +56,7 @@ const BugView: React.FunctionComponent<BugViewProps> = ({ bug, handleBugStatusUp
         const newComment = {
             id: comments.length + 1,
             author: "Logged in user name would go here",
-            createdAt: new Date().toLocaleString(),
+            created_at: new Date().toLocaleString(),
             bid: bug.id,
             pid: project.id,
             content: commentText

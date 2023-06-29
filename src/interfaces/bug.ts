@@ -1,3 +1,6 @@
+import CommentType from "./CommentType"
+import UserType from "./UserType"
+
 interface Bug {
     id: number,
     name: string,
@@ -5,7 +8,10 @@ interface Bug {
     status: string,
     priority: string,
     description: string,
-    developer: string
+    developer: UserType | null,
+    comments: CommentType[] | null,
+    created_at: string,
+    updated_at: string
   }
 
 export default Bug

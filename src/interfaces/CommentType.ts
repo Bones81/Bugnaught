@@ -1,7 +1,9 @@
+import UserType from "./UserType"
+
 interface CommentType {
     id: number,
-    author: string,
-    createdAt: string,
+    author: UserType,
+    created_at: string,
     bid: number,
     pid: number,
     content: string

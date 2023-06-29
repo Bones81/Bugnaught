@@ -21,7 +21,9 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
         const newProj = {
             id: props.projects.length + 1,
             name: projectName,
-            bugs: []
+            bugs: [],
+            team_lead: null,
+            assigned_devs: null
         }
 
         props.setProjects([...props.projects, newProj])
