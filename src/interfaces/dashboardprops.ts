@@ -1,6 +1,7 @@
 import Project from "./Project"
 import Bug from "./Bug"
 import CommentType from "./CommentType"
+import UserType from "./UserType"
 
 interface DashboardProps {
     view: String,
@@ -9,7 +10,8 @@ interface DashboardProps {
     bugs: Bug[],
     setBugs: React.Dispatch<React.SetStateAction<Bug[]>>,
     comments: CommentType[],
-    setComments: React.Dispatch<React.SetStateAction<CommentType[]>>
+    setComments: React.Dispatch<React.SetStateAction<CommentType[]>>,
+    users: UserType[]
 }
 
 export default DashboardProps

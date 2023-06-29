@@ -6,7 +6,7 @@ import CommentType from '../interfaces/CommentType.ts'
 import Comment from '../Comment/comment.tsx'
 import Project from '../interfaces/Project.ts'
 
-const BugView: React.FunctionComponent<BugViewProps> = ({ bug, comments, handleBugStatusUpdate, project, projects, setComments, setView }: BugViewProps) => {
+const BugView: React.FunctionComponent<BugViewProps> = ({ bug, comments, handleBugStatusUpdate, project, projects, setComments, setView, users }: BugViewProps) => {
     
     // const mockComments: CommentType[] = [
     //     {id: 1, author: "Nathan", createdAt: new Date('June 17, 2019 13:24:00').toLocaleString(), bid: 1, pid: 1, content: "Needs dev assignment. Anyone want to take this one?"},
@@ -48,23 +48,30 @@ const BugView: React.FunctionComponent<BugViewProps> = ({ bug, comments, handleB
     const handleAddComment = (e: any) => {
         e.preventDefault()
 
+        const author = users.find( user => user.id === Math.floor(Math.random() * users.length))
+        console.log(author);
+        
         if(!commentText) {
             alert("No text entered");
             return
         }
 
-        const newComment = {
-            id: comments.length + 1,
-            author: "Logged in user name would go here",
-            created_at: new Date().toLocaleString(),
-            bid: bug.id,
-            pid: project.id,
-            content: commentText
-        }
+        if(author) {
+            const newComment = {
+                id: comments.length + 1,
+                author: author,
+                created_at: new Date().toLocaleString(),
+                bid: bug.id,
+                pid: project.id,
+                content: commentText
+            }
 
-        
-        setComments([...comments, newComment])
-        setCommentText('')
+            setComments([...comments, newComment])
+            setCommentText('')
+        } else {
+            throw new Error("Couldn't find author for comment. No update to comments data.");
+            
+        }
 
     }
 
@@ -103,7 +110,7 @@ const BugView: React.FunctionComponent<BugViewProps> = ({ bug, comments, handleB
                         <option value="closed" >Closed</option>
                     </select>
                 </Card.Text>
-                <h4 className="mt-2 p-2 text-center">Assigned to: {bug.developer}</h4>
+                <h4 className="mt-2 p-2 text-center">Assigned to: {bug.developer?.first_name + " " + bug.developer?.last_name}</h4>
                 <Card.Text className='fs-3 border border-3 px-5 py-3 my-3 shadow'><span className="text-primary fw-bold">Bug Description:</span> {bug.description}</Card.Text>
                 <Card.Text className="text-muted text-center my-3">(Attachment: Screenshot or Other Attachment Would Go Here)</Card.Text>
 

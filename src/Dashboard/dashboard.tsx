@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from "react"
+import { useState, ChangeEvent } from "react"
 import "./dashboard.css"
 
 import Bug from "../interfaces/Bug"
@@ -7,7 +7,7 @@ import DashboardProps from "../interfaces/DashboardProps"
 import Project from "../interfaces/Project"
 import ProjectView from "../ProjectView/ProjectView"
 
-const Dashboard: React.FunctionComponent<DashboardProps> = ({projects, bugs, setBugs, view, setView, comments, setComments }: DashboardProps) => {
+const Dashboard: React.FunctionComponent<DashboardProps> = ({projects, bugs, setBugs, view, setView, comments, setComments, users }: DashboardProps) => {
 
     const [bugID, setBugID] = useState<Number | null>(null)
     const [projectID, setProjectID] = useState<Number | null>(null)
@@ -121,7 +121,16 @@ const Dashboard: React.FunctionComponent<DashboardProps> = ({projects, bugs, set
                             return (
                                 <>
                                     <h1 className="display-1 mb-3 text-center">Bug View</h1>
-                                    { bug ? <BugView bug={bug} handleBugStatusUpdate={handleBugStatusUpdate} projects={projects} project={associatedProject} setView={setView} comments={comments} setComments={setComments}/> : <h3>Error: No Bug Data Found</h3> } 
+                                    { bug ? <BugView 
+                                                bug={bug} 
+                                                handleBugStatusUpdate={handleBugStatusUpdate} 
+                                                projects={projects} 
+                                                project={associatedProject} 
+                                                setView={setView} 
+                                                comments={comments} 
+                                                setComments={setComments}
+                                                users={users}
+                                            /> : <h3>Error: No Bug Data Found</h3> } 
                                 </>
                             )
                         } else {

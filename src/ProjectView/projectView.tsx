@@ -22,7 +22,10 @@ const ProjectView: React.FunctionComponent<ProjectViewProps> = ({ bugs, handleRe
             priority: priority,
             status: "open",
             description: description,
-            developer: ""
+            developer: null,
+            comments: null,
+            created_at: new Date().toLocaleString(),
+            updated_at: ""
         }
         
         setBugs([...bugs, newBug])
@@ -83,7 +86,7 @@ const ProjectView: React.FunctionComponent<ProjectViewProps> = ({ bugs, handleRe
                                 <td className='text-start'>{bug.name}</td>
                                 <td>{bug.status.toUpperCase()}</td>
                                 <td>{bug.priority}</td>
-                                <td>{bug.developer || "None assigned" }</td>
+                                <td>{bug.developer ? bug.developer.first_name + " " + bug.developer.last_name : "None assigned" }</td>
                                 <td>TBD</td>
                                 <td>{bug.description}</td>
                             </tr>                                            

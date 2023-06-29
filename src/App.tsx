@@ -10,31 +10,32 @@ import Project from './interfaces/Project'
 import UserType from './interfaces/UserType'
 
 const App: React.FunctionComponent = () => {
+  // const API_URL = 'https://bugnaughtbe.onrender.com/api/'
+  const API_URL = 'http://localhost:3000/api/'
+
   const [view, setView] = useState("projects-view");
   const [users, setUsers] = useState<UserType[]>([])
   const [comments, setComments] = useState<CommentType[]>([])
   
-  // const mockBugs: Bug[] = [
-    //   {id: 1, name: 'Data issue', pid: 1, status: "open", priority: 'high', developer: "Nathan", description: 'No real data yet!'},
-    //   {id: 2, name: 'Can\'t add comments', pid: 1, status: "open", priority: 'medium', developer: "Nathan", description: 'Cannot add comments to bug yet!'},
-    //   {id: 3, name: 'Needs Bootstrap', pid: 1, status: "closed", priority: 'low', developer: "Sujan", description: 'Bootstrap not integrated!'},
-    //   {id: 4, name: 'Colors are bad', pid: 2, status: "assigned", priority: 'high', developer: "Nathan", description: 'Needs better colors'},
-    //   {id: 5, name: 'Blur not working on mobile', pid: 2, status: "open", priority: 'medium', developer: "Sujan", description: 'Blur not working on mobile, even though it looks fine in devTools'},
-    //   {id: 6, name: 'Database speed', pid: 2, status: "closed", priority: 'low', developer: "Sujan", description: 'Data takes too long to load from spun down servers!'},
-    //   {id: 7, name: 'Layout too simple', pid: 3, status: "open", priority: 'high', developer: "", description: 'Needs pizazz; maybe parallax?'},
-    //   {id: 8, name: 'Old images', pid: 3, status: "open", priority: 'medium', developer: "", description: 'Needs some fresh imagery'},
-    //   {id: 9, name: 'Colors', pid: 3, status: "open", priority: 'low', developer: "", description: 'Too much pastel; Find new, more dramatic color scheme.'}
-    // ]
+  const mockBugs: Bug[] = [
+      {id: 1, name: 'Data issue', pid: 1, status: "open", priority: 'high', developer: { id: 1, first_name: "Nathan", last_name: "Freeman", role: "admin" }, description: 'No real data yet!', comments: null, created_at: "", updated_at: ""},
+      {id: 2, name: 'Can\'t add comments', pid: 1, status: "open", priority: 'medium', developer: { id: 1, first_name: "Nathan", last_name: "Freeman", role: "admin" }, description: 'Cannot add comments to bug yet!', comments: null, created_at: "", updated_at: ""},
+      {id: 3, name: 'Needs Bootstrap', pid: 1, status: "closed", priority: 'low', developer: { id: 1, first_name: "Sujan", last_name: "Trivedi", role: "manager" }, description: 'Bootstrap not integrated!', comments: null, created_at: "", updated_at: ""},
+      {id: 4, name: 'Colors are bad', pid: 2, status: "assigned", priority: 'high', developer: { id: 1, first_name: "Nathan", last_name: "Freeman", role: "admin" }, description: 'Needs better colors', comments: null, created_at: "", updated_at: ""},
+      {id: 5, name: 'Blur not working on mobile', pid: 2, status: "open", priority: 'medium', developer: { id: 1, first_name: "Sujan", last_name: "Trivedi", role: "manager" }, description: 'Blur not working on mobile, even though it looks fine in devTools', comments: null, created_at: "", updated_at: ""},
+      {id: 6, name: 'Database speed', pid: 2, status: "closed", priority: 'low', developer: { id: 1, first_name: "Sujan", last_name: "Trivedi", role: "manager" }, description: 'Data takes too long to load from spun down servers!', comments: null, created_at: "", updated_at: ""},
+      {id: 7, name: 'Layout too simple', pid: 3, status: "open", priority: 'high', developer: null, description: 'Needs pizazz; maybe parallax?', comments: null, created_at: "", updated_at: ""},
+      {id: 8, name: 'Old images', pid: 3, status: "open", priority: 'medium', developer: null, description: 'Needs some fresh imagery', comments: null, created_at: "", updated_at: ""},
+      {id: 9, name: 'Colors', pid: 3, status: "open", priority: 'low', developer: null, description: 'Too much pastel; Find new, more dramatic color scheme.', comments: null, created_at: "", updated_at: ""}
+    ]
     
     // localStorage.removeItem("BUGNAUGHT_BUGS") // development use only when resetting of bugs is needed
     // This two lines should set the initial bugs array from localStorage, if it already exists; otherwise it will initialize bugs with an empty array
-    // const initialBugs: Bug[] = localStorage.getItem("BUGNAUGHT_BUGS") && JSON.parse(localStorage.getItem("BUGNAUGHT_BUGS") || "[]") || mockBugs
-    const [bugs, setBugs] = useState<Bug[]>([])
+    const initialBugs: Bug[] = localStorage.getItem("BUGNAUGHT_BUGS") && JSON.parse(localStorage.getItem("BUGNAUGHT_BUGS") || "[]") || mockBugs
+    const [bugs, setBugs] = useState<Bug[]>(initialBugs)
     
     const [projects, setProjects] = useState<Project[]>([])
 
-  // const API_URL = 'https://bugnaughtbe.onrender.com/api/'
-  const API_URL = 'http://localhost:3000/api/'
 
 
   const getUsers = async () => {
@@ -176,10 +177,23 @@ const App: React.FunctionComponent = () => {
       <div className="container-fluid mb-5">
         <div className="row justify-content-around align-items-center my-3 gx-3">
           <div className="col-xl-3 align-self-start mt-5">
-            <InfoPanel projects={projects} setProjects={setProjects} setView={setView}/>
+            <InfoPanel 
+              projects={projects} 
+              setProjects={setProjects} 
+              setView={setView}
+            />
           </div>
           <div className="col-xl-8">
-            <Dashboard projects={projects} view={view} setView={setView} bugs={bugs} setBugs={setBugs} comments={comments} setComments={setComments}/>
+            <Dashboard 
+              projects={projects} 
+              view={view} 
+              setView={setView} 
+              bugs={bugs} 
+              setBugs={setBugs} 
+              comments={comments} 
+              setComments={setComments}
+              users={users}
+            />
           </div>
         </div>
       </div>
