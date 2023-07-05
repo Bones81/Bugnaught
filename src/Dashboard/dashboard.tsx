@@ -8,7 +8,7 @@ import Project from "../interfaces/Project"
 import ProjectView from "../ProjectView/ProjectView"
 import UserView from "../UserView/UserView"
 
-const Dashboard: React.FunctionComponent<DashboardProps> = ({projects, bugs, setBugs, view, setView, comments, setComments, users }: DashboardProps) => {
+const Dashboard: React.FunctionComponent<DashboardProps> = ({projects, bugs, setBugs, view, setView, comments, setComments, users, user }: DashboardProps) => {
 
     const [bugID, setBugID] = useState<Number | null>(null)
     const [projectID, setProjectID] = useState<Number | null>(null)
@@ -154,8 +154,10 @@ const Dashboard: React.FunctionComponent<DashboardProps> = ({projects, bugs, set
                     case "single-user-view":
                         return (
                             <>
-                                <h1 className="display-1 mb-3 text-center">Single User View</h1>
-                                <UserView />
+                                <h1 className="display-1 mb-3 text-center">User Info</h1>
+                                <UserView 
+                                    user={user} 
+                                />
                             </>
                         )
                     default:

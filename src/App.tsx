@@ -17,34 +17,44 @@ const App: React.FunctionComponent = () => {
   const [users, setUsers] = useState<UserType[]>([])
   const [comments, setComments] = useState<CommentType[]>([])
   
+  
   const mockBugs: Bug[] = [
-      {id: 1, name: 'Data issue', pid: 1, status: "open", priority: 'high', developer: { id: 1, first_name: "Nathan", last_name: "Freeman", role: "admin" }, description: 'No real data yet!', comments: null, created_at: "", updated_at: ""},
-      {id: 2, name: 'Can\'t add comments', pid: 1, status: "open", priority: 'medium', developer: { id: 1, first_name: "Nathan", last_name: "Freeman", role: "admin" }, description: 'Cannot add comments to bug yet!', comments: null, created_at: "", updated_at: ""},
-      {id: 3, name: 'Needs Bootstrap', pid: 1, status: "closed", priority: 'low', developer: { id: 1, first_name: "Sujan", last_name: "Trivedi", role: "manager" }, description: 'Bootstrap not integrated!', comments: null, created_at: "", updated_at: ""},
-      {id: 4, name: 'Colors are bad', pid: 2, status: "assigned", priority: 'high', developer: { id: 1, first_name: "Nathan", last_name: "Freeman", role: "admin" }, description: 'Needs better colors', comments: null, created_at: "", updated_at: ""},
-      {id: 5, name: 'Blur not working on mobile', pid: 2, status: "open", priority: 'medium', developer: { id: 1, first_name: "Sujan", last_name: "Trivedi", role: "manager" }, description: 'Blur not working on mobile, even though it looks fine in devTools', comments: null, created_at: "", updated_at: ""},
-      {id: 6, name: 'Database speed', pid: 2, status: "closed", priority: 'low', developer: { id: 1, first_name: "Sujan", last_name: "Trivedi", role: "manager" }, description: 'Data takes too long to load from spun down servers!', comments: null, created_at: "", updated_at: ""},
-      {id: 7, name: 'Layout too simple', pid: 3, status: "open", priority: 'high', developer: null, description: 'Needs pizazz; maybe parallax?', comments: null, created_at: "", updated_at: ""},
-      {id: 8, name: 'Old images', pid: 3, status: "open", priority: 'medium', developer: null, description: 'Needs some fresh imagery', comments: null, created_at: "", updated_at: ""},
-      {id: 9, name: 'Colors', pid: 3, status: "open", priority: 'low', developer: null, description: 'Too much pastel; Find new, more dramatic color scheme.', comments: null, created_at: "", updated_at: ""}
-    ]
-    
-    // localStorage.removeItem("BUGNAUGHT_BUGS") // development use only when resetting of bugs is needed
-    // This two lines should set the initial bugs array from localStorage, if it already exists; otherwise it will initialize bugs with an empty array
-    const initialBugs: Bug[] = localStorage.getItem("BUGNAUGHT_BUGS") && JSON.parse(localStorage.getItem("BUGNAUGHT_BUGS") || "[]") || mockBugs
-    const [bugs, setBugs] = useState<Bug[]>(initialBugs)
-    
-    const [projects, setProjects] = useState<Project[]>([])
-
-
-
+    {id: 1, name: 'Data issue', pid: 1, status: "open", priority: 'high', developer: { id: 1, first_name: "Nathan", last_name: "Freeman", role: "admin" }, description: 'No real data yet!', comments: null, created_at: "", updated_at: ""},
+    {id: 2, name: 'Can\'t add comments', pid: 1, status: "open", priority: 'medium', developer: { id: 1, first_name: "Nathan", last_name: "Freeman", role: "admin" }, description: 'Cannot add comments to bug yet!', comments: null, created_at: "", updated_at: ""},
+    {id: 3, name: 'Needs Bootstrap', pid: 1, status: "closed", priority: 'low', developer: { id: 1, first_name: "Sujan", last_name: "Trivedi", role: "manager" }, description: 'Bootstrap not integrated!', comments: null, created_at: "", updated_at: ""},
+    {id: 4, name: 'Colors are bad', pid: 2, status: "assigned", priority: 'high', developer: { id: 1, first_name: "Nathan", last_name: "Freeman", role: "admin" }, description: 'Needs better colors', comments: null, created_at: "", updated_at: ""},
+    {id: 5, name: 'Blur not working on mobile', pid: 2, status: "open", priority: 'medium', developer: { id: 1, first_name: "Sujan", last_name: "Trivedi", role: "manager" }, description: 'Blur not working on mobile, even though it looks fine in devTools', comments: null, created_at: "", updated_at: ""},
+    {id: 6, name: 'Database speed', pid: 2, status: "closed", priority: 'low', developer: { id: 1, first_name: "Sujan", last_name: "Trivedi", role: "manager" }, description: 'Data takes too long to load from spun down servers!', comments: null, created_at: "", updated_at: ""},
+    {id: 7, name: 'Layout too simple', pid: 3, status: "open", priority: 'high', developer: null, description: 'Needs pizazz; maybe parallax?', comments: null, created_at: "", updated_at: ""},
+    {id: 8, name: 'Old images', pid: 3, status: "open", priority: 'medium', developer: null, description: 'Needs some fresh imagery', comments: null, created_at: "", updated_at: ""},
+    {id: 9, name: 'Colors', pid: 3, status: "open", priority: 'low', developer: null, description: 'Too much pastel; Find new, more dramatic color scheme.', comments: null, created_at: "", updated_at: ""}
+  ]
+  
+  // localStorage.removeItem("BUGNAUGHT_BUGS") // development use only when resetting of bugs is needed
+  // This two lines should set the initial bugs array from localStorage, if it already exists; otherwise it will initialize bugs with an empty array
+  const initialBugs: Bug[] = localStorage.getItem("BUGNAUGHT_BUGS") && JSON.parse(localStorage.getItem("BUGNAUGHT_BUGS") || "[]") || mockBugs
+  const [bugs, setBugs] = useState<Bug[]>(initialBugs)
+  
+  const [projects, setProjects] = useState<Project[]>([])
+  
+  
   const getUsers = async () => {
     const jsonUsers = await fetch(API_URL + 'users')
-      .then( res => res.json())
-      .catch( err => console.error(err))
+    .then( res => res.json())
+    .catch( err => console.error(err))
     setUsers(jsonUsers);
-    
   }
+  
+  const getUser = async (user_id: number) => {
+    const jsonUser = await fetch(API_URL + 'users/' + user_id)
+    .then ( res => res.json())
+    .catch (err => console.error(err))
+    setUser(jsonUser)
+  }
+
+  const defaultUser: UserType = {first_name: 'No User', last_name: 'Assigned', id: 0, role: 'none'}
+  
+  const [user, setUser] = useState<UserType>(defaultUser)
 
   const getProjects = async () => {
     const jsonProjects = await fetch(API_URL + 'projects')
@@ -160,7 +170,8 @@ const App: React.FunctionComponent = () => {
   }, [])
 
   useEffect(() => {
-    getComments()
+    getComments(),
+    getUser(Math.floor(Math.random() * users.length))
   }, [users])
 
   useEffect(() => {
@@ -181,6 +192,7 @@ const App: React.FunctionComponent = () => {
               projects={projects} 
               setProjects={setProjects} 
               setView={setView}
+              user={user}
             />
           </div>
           <div className="col-xl-8">
@@ -193,6 +205,7 @@ const App: React.FunctionComponent = () => {
               comments={comments} 
               setComments={setComments}
               users={users}
+              user={user}
             />
           </div>
         </div>

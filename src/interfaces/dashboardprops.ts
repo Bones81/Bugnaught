@@ -11,7 +11,8 @@ interface DashboardProps {
     setBugs: React.Dispatch<React.SetStateAction<Bug[]>>,
     comments: CommentType[],
     setComments: React.Dispatch<React.SetStateAction<CommentType[]>>,
-    users: UserType[]
+    users: UserType[],
+    user: UserType
 }
 
 export default DashboardProps

@@ -1,9 +1,9 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent } from 'react'
 import { Modal, Button, Form, FormControl, FormLabel } from 'react-bootstrap'
 import './infopanel.css'
 import InfoPanelProps from '../interfaces/InfoPanelProps'
 
-const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
+const InfoPanel: React.FunctionComponent<InfoPanelProps> = ({projects, setProjects, setView, user}: InfoPanelProps) => {
     const [showAddProject, setShowAddProject] = useState(false)
 
     const handleCloseAddProject = () => setShowAddProject(false)
@@ -19,14 +19,14 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
     const handleAddProject = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
         const newProj = {
-            id: props.projects.length + 1,
+            id: projects.length + 1,
             name: projectName,
             bugs: [],
             team_lead: null,
             assigned_devs: null
         }
 
-        props.setProjects([...props.projects, newProj])
+        setProjects([...projects, newProj])
         console.log('This should add new project info to projects list');
         setProjectName("")
         setShowAddProject(false)
@@ -35,23 +35,23 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
 
     const handleViewUserBugs = (e: any) => {
         e.preventDefault()
-        props.setView("user-bugs-view")
+        setView("user-bugs-view")
     }
 
     const handleGetSingleUserView = (e: any) => {
         e.preventDefault()
-        props.setView("single-user-view")
+        setView("single-user-view")
     }
 
-    const [user, setUser] = useState('')
-    const users = [
-        'Nathan', 'Sujan', 'Jeff', 'Olivia'
-    ]
-    // const projects = [...props.projects]
+    // const [user, setUser] = useState('')
+    // const users = [
+    //     'Nathan', 'Sujan', 'Jeff', 'Olivia'
+    // ]
+    // const projects = [...projects]
 
-    useEffect(() => {
-        setUser(users[Math.floor(Math.random() * users.length)]) // return random user for fun
-    }, [])
+    // useEffect(() => {
+    //     setUser(users[Math.floor(Math.random() * users.length)]) // return random user for fun
+    // }, [])
 
     return (
         <>
@@ -60,7 +60,7 @@ const InfoPanel: React.FunctionComponent<InfoPanelProps> = (props) => {
                 {!user ?
                     <h3 className="display-5 my-5">Hello, Guest!</h3>
                     :
-                    <h3 className="display-5 my-5">Hello, {user}!</h3>
+                    <h3 className="display-5 my-5">Hello, {user.first_name} {user.last_name}!</h3>
                 }
                 <ul className="d-flex flex-xl-column align-items-center shadow bg-secondary m-3 p-3 border border-1 rounded">
                     <li className="btn btn-lg btn-link flex-fill text-light my-xl-5 mx-2 px-xl-3 fs-5 text-decoration-none border border-1 border-dark shadow-sm" onClick={handleShowAddProject}>Add Project</li>
