@@ -6,6 +6,7 @@ import BugView from "../BugView/BugView"
 import DashboardProps from "../interfaces/DashboardProps"
 import Project from "../interfaces/Project"
 import ProjectView from "../ProjectView/ProjectView"
+import UserView from "../UserView/UserView"
 
 const Dashboard: React.FunctionComponent<DashboardProps> = ({projects, bugs, setBugs, view, setView, comments, setComments, users }: DashboardProps) => {
 
@@ -154,7 +155,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = ({projects, bugs, set
                         return (
                             <>
                                 <h1 className="display-1 mb-3 text-center">Single User View</h1>
-                                <h6 className="text-center">Coming Soon!</h6>
+                                <UserView />
                             </>
                         )
                     default:
